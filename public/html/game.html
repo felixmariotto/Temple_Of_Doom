@@ -32,6 +32,7 @@
 	<script src="./js/Atlas.js"></script>
 	<script src="./js/AtlasHelper.js"></script>
 	<script src="./js/SquareHelper.js"></script>
+	<script src="./js/CharaControl.js"></script>
 
 </head>
 
@@ -44,6 +45,7 @@
 		
 		var scene, camera, renderer, controls, stats ;
 		var atlas, square, squareHelper;
+		var charaControl;
 
 		window.addEventListener('load', ()=> {
 			init();
@@ -77,6 +79,8 @@
 			square.helper = SquareHelper( square );
 			scene.add( square.helper );
 
+			charaControl = CharaControl();
+
 			loop();
 		};
 
@@ -85,7 +89,7 @@
 		function loop() {
 			requestAnimationFrame( loop );
 			renderer.render( scene, camera );
-			square.move( 0.005, 0, 0 );
+			charaControl.walkRight(0.01);
 		};
 
 
