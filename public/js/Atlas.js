@@ -59,8 +59,6 @@ function Atlas() {
 
 			if ( this.camera ) {
 				this.camera.position.x += x ;
-				// this.camera.position.y += y ;
-				// this.camera.position.z += z ;
 				this.camera.lookAt(
 					this.position.x,
 					this.position.y + 2,
