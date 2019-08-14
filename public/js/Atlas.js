@@ -10,6 +10,7 @@ function Atlas() {
 	const tracks = [ d0, d1, d2 ];
 
 	var pointsArrays = [];
+	var isFlying ;
 
 
 
@@ -70,8 +71,10 @@ function Atlas() {
 		};
 
 
+
 		function isFlying() {
 			
+			/*
 			let track = tracks[ this.position.z ]
 
 			// Quelle est la hauteur de la marche sur laquelle
@@ -84,10 +87,22 @@ function Atlas() {
 
 			if ( isFlying == true ) {
 
-				// Comment savoir, en fonction de this.width, si l'angle
-				// droit du carré est au-dessus de la prochaine marche ?
 				let heightCurrentStepRight = track[ Math.floor(this.position.x + this.width) ];
 				isFlying = ( heightCurrentStepRight + 0.02 ) < heightSquare ;
+
+				return isFlying ;
+
+			} else {
+				return false ;
+			};
+			*/
+
+			
+			isFlying = ( tracks[ this.position.z ][ Math.floor(this.position.x) ] + 0.02 ) < this.position.y ;
+
+			if ( isFlying == true ) {
+
+				isFlying = ( tracks[ this.position.z ][ Math.floor(this.position.x + this.width) ] + 0.02 ) < this.position.y ;
 
 				return isFlying ;
 

@@ -4,8 +4,9 @@ function Controler( logicSquare ) {
 
 	const square = logicSquare;
 
-	const RUNSPEED = 0.03 ;
+	const RUNSPEED = 0.035 ;
 	const LEAPSPEED = 0.1 ;
+	const FALLSPEED = -0.1 ;
 
 	var run = 0 ;
 	var leap = 0 ;
@@ -56,7 +57,7 @@ function Controler( logicSquare ) {
 
 
 	function fall() {
-		square.move( 0, -0.05, 0 );
+		square.move( 0, FALLSPEED, 0 );
 		// keep the cube from entering the ground
 		if ( square.collision.right > 0 ) {
 			square.move( 0, square.collision.right, 0 );
