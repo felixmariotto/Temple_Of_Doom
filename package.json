@@ -1,0 +1,34 @@
+{
+  "name": "temple_of_doom",
+  "version": "1.0.0",
+  "description": "2.5D runner game",
+  "engines": {
+    "node": "10.x"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixmariotto/Temple_Of_Doom.git"
+  },
+  "keywords": [
+    "runner",
+    "game",
+    "2.5D",
+    "three.js",
+    "felix",
+    "mariotto"
+  ],
+  "author": "felix mariotto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felixmariotto/Temple_Of_Doom/issues"
+  },
+  "homepage": "https://github.com/felixmariotto/Temple_Of_Doom#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

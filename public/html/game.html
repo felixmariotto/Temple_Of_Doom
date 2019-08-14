@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Temple Of Doom</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+
+
+	<style type="text/css">
+
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		body {
+			overflow: hidden;
+		}
+		
+		#world {
+			height: 100%;
+			width: 100%;
+			background-color: red;
+		}
+
+	</style>
+
+	<script src="./js/libs/three.js"></script>
+	<script src="./js/libs/stats.min.js"></script>
+
+	<script src="./js/Atlas.js"></script>
+	<script src="./js/AtlasHelper.js"></script>
+
+</head>
+
+
+<body>
+
+	<canvas id="world"></canvas>
+
+	<script type="text/javascript">
+		
+		var scene, camera, renderer, stats ;
+		var atlas;
+
+		window.addEventListener('load', ()=> {
+			init();
+		});
+
+
+
+		function init() {
+
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color(0x555555);
+
+			camera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 1, 100 );
+			camera.position.x = 20;
+			camera.lookAt( 0, 0, 0 );
+
+			renderer = new THREE.WebGLRenderer({antialias:true, canvas:document.getElementById('world')});
+			renderer.setSize( window.innerWidth, window.innerHeight );
+
+
+			atlas = Atlas();
+			atlasHelper = AtlasHelper( scene );
+
+			atlasHelper.init( atlas.getArrays() );
+
+
+			loop();
+		};
+
+
+
+		function loop() {
+			requestAnimationFrame( loop );
+			renderer.render( scene, camera );
+		};
+
+
+	</script>
+
+</body>
+</html>
