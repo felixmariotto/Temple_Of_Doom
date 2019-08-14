@@ -24,11 +24,16 @@ function Controler( logicSquare ) {
 			leapLevel = Math.sin( leap );
 			if ( leap < 1.5 ) {
 				leapOffset( 1 - leapLevel );
-			} else {
-				leapOffset( -1 + leapLevel );
 			};
 			
-			if ( leap > 3 ) leap = 0 ;
+			if ( leap > 1.5 ) leap = 0 ;
+		};
+
+
+		if ( leap == 0 ) {
+			if ( square.isFlying() ) {
+				fall();
+			};
 		};
 
 	};
@@ -46,6 +51,12 @@ function Controler( logicSquare ) {
 
 	function leapOffset( offset ) {
 		square.move( 0, offset * 0.3 , 0 );
+		
+	};
+
+
+	function fall() {
+		square.move( 0, -0.05, 0 );
 		// keep the cube from entering the ground
 		if ( square.collision.right > 0 ) {
 			square.move( 0, square.collision.right, 0 );

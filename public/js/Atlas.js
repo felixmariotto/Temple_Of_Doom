@@ -70,12 +70,41 @@ function Atlas() {
 		};
 
 
+		function isFlying() {
+			
+			let track = tracks[ this.position.z ]
+
+			// Quelle est la hauteur de la marche sur laquelle
+			// l'angle bas-gauche se trouve ?
+				// La hauteur de l'angle bas-gauche est-elle
+				// inférieur a la hauteur de l'angle + n ?
+			let heightCurrentStepLeft = track[ Math.floor(this.position.x) ];
+			let heightSquare = this.position.y ;
+			let isFlying = ( heightCurrentStepLeft + 0.02 ) < heightSquare ;
+
+			if ( isFlying == true ) {
+
+				// Comment savoir, en fonction de this.width, si l'angle
+				// droit du carré est au-dessus de la prochaine marche ?
+				let heightCurrentStepRight = track[ Math.floor(this.position.x + this.width) ];
+				isFlying = ( heightCurrentStepRight + 0.02 ) < heightSquare ;
+
+				return isFlying ;
+
+			} else {
+				return false ;
+			};
+
+		};
+
+
 		return {
 			width,
 			height,
 			position,
 			collision,
 			move,
+			isFlying,
 			helper:undefined,
 			camera: undefined,
 		};
