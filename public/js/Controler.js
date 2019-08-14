@@ -47,7 +47,7 @@ function Controler( logicSquare ) {
 		// keep the cube from entering a wall
 		if ( (offset > 0 && square.collision.right > 0) ||
 			 (offset < 0 && square.collision.left > 0) ) {
-			
+
 			square.move( - offset, 0, 0 );
 		};
 	};
@@ -78,14 +78,22 @@ function Controler( logicSquare ) {
 		switch ( e.key ) {
 
 			case "ArrowRight" :
-				if ( run < RUNSPEED ) {
-					run = RUNSPEED;
-				};
+				run = RUNSPEED;
 			break;
 
 			case "ArrowLeft" :
-				if ( run > -RUNSPEED ) {
-					run = -RUNSPEED;
+				run = -RUNSPEED;
+			break;
+
+			case "ArrowUp" :
+				if ( square.position.z > 0 ) {
+					square.shift( -1 );
+				};
+			break;
+
+			case "ArrowDown" :
+				if ( square.position.z < 2 ) {
+					square.shift( 1 );
 				};
 			break;
 

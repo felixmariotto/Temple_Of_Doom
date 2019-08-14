@@ -113,12 +113,18 @@ function Atlas() {
 		};
 
 
+		function shift( increment ) {
+			this.move( 0, 0, increment );
+		};
+
+
 		return {
 			width,
 			height,
 			position,
 			collision,
 			move,
+			shift,
 			isFlying,
 			helper:undefined,
 			camera: undefined,
