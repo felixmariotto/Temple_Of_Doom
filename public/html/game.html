@@ -49,8 +49,6 @@
 		var charaControl;
 
 
-		var controler = Controler();
-
 
 
 		window.addEventListener('load', ()=> {
@@ -88,7 +86,7 @@
 			square.camera = camera ;
 			scene.add( square.helper );
 
-			charaControl = CharaControl( square );
+			controler = Controler( square );
 
 			loop();
 		};
