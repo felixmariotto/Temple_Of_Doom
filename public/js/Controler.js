@@ -6,6 +6,7 @@ function Controler( logicSquare ) {
 
 	const RUNSPEED = 0.035 ;
 	const LEAPSPEED = 0.1 ;
+	const LEAPPOWER = 0.3 ;
 	const FALLSPEED = -0.1 ;
 
 	var run = 0 ;
@@ -51,7 +52,7 @@ function Controler( logicSquare ) {
 
 
 	function leapOffset( offset ) {
-		square.move( 0, offset * 0.3 , 0 );
+		square.move( 0, offset * LEAPPOWER , 0 );
 		
 	};
 
@@ -87,7 +88,7 @@ function Controler( logicSquare ) {
 			break;
 
 			case " " :
-				if ( leap == 0 ) {
+				if ( leap == 0 && !square.isFlying() ) {
 					leap = LEAPSPEED;
 				};
 			break;

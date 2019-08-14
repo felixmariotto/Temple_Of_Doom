@@ -74,6 +74,11 @@
 			renderer = new THREE.WebGLRenderer({antialias:true, canvas:document.getElementById('world')});
 			renderer.setSize( window.innerWidth, window.innerHeight );
 
+			stats = new Stats();
+			document.body.appendChild( stats.dom );
+
+
+
 
 			atlas = Atlas();
 			atlas.initVectors();
@@ -96,6 +101,7 @@
 		function loop() {
 			requestAnimationFrame( loop );
 			renderer.render( scene, camera );
+			stats.update();
 			controler.update();
 		};
 
