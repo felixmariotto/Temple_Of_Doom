@@ -31,18 +31,39 @@ function Atlas() {
 
 
 
+
+
+
 	// LogicCube is an abstrac class, used to compute colisions
 	// with the atlas.
 	function LogicSquare( width, height, position ) {
 
 		position = position || new THREE.Vector3();
 
+
+		function move( x, y, z ) {
+			this.position.x += x ;
+			this.position.y += y ;
+			this.position.z += z ;
+
+			if ( this.helper ) {
+				this.helper.position.x += x ;
+				this.helper.position.y += y ;
+				this.helper.position.z += z ;
+			};
+		};
+
+
 		return {
 			width,
 			height,
-			position
+			offsetY: 0,
+			position,
+			move,
+			helper:undefined
 		};
 	};
+
 
 
 

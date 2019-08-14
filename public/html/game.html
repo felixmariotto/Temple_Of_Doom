@@ -43,7 +43,7 @@
 	<script type="text/javascript">
 		
 		var scene, camera, renderer, controls, stats ;
-		var atlas;
+		var atlas, square, squareHelper;
 
 		window.addEventListener('load', ()=> {
 			init();
@@ -69,12 +69,13 @@
 			atlas = Atlas();
 			atlas.initVectors();
 
-			atlasHelper = AtlasHelper( atlas.pointsArrays );
+			let atlasHelper = AtlasHelper( atlas.pointsArrays );
 			scene.add( atlasHelper );
 
 			square = atlas.LogicSquare( 0.5, 0.5 );
-			squareHelper = SquareHelper( square );
-			scene.add( squareHelper );
+			square.offsetY = 0.2;
+			square.helper = SquareHelper( square );
+			scene.add( square.helper );
 
 			loop();
 		};
@@ -84,6 +85,7 @@
 		function loop() {
 			requestAnimationFrame( loop );
 			renderer.render( scene, camera );
+			square.move( 0.01, 0, 0 );
 		};
 
 
