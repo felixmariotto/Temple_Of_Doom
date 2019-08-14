@@ -17,7 +17,7 @@ function Controler( logicSquare ) {
 	function update() {
 
 		if ( run != 0 ) {
-			walkRight( run );
+			walk( run );
 		};
 
 
@@ -42,10 +42,12 @@ function Controler( logicSquare ) {
 
 
 
-	function walkRight( offset ) {
+	function walk( offset ) {
 		square.move( offset, 0, 0 );
 		// keep the cube from entering a wall
-		if ( square.collision.right > 0 ) {
+		if ( (offset > 0 && square.collision.right > 0) ||
+			 (offset < 0 && square.collision.left > 0) ) {
+			
 			square.move( - offset, 0, 0 );
 		};
 	};
