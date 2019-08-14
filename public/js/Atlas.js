@@ -64,7 +64,6 @@ function Atlas() {
 		return {
 			width,
 			height,
-			offsetY: 0,
 			position,
 			collision,
 			move,
