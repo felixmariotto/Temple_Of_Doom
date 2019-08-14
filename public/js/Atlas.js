@@ -119,17 +119,11 @@ function Atlas() {
 				this.move( 0, 0, increment );
 			};
 
+			// isInside returns true if the square would be inside the passed track
+			// if it was transposed to it without any more movement.
 			function isInside( square, track ) {
-				// Si la hauteur de mon coin gauche est supérieur à la hauteur
-				// de la dalle sur laquelle je suis, true
-				console.log( square.position.y );
-				console.log( track[ Math.floor(square.position.x) ] );
-				if ( square.position.y >= track[ Math.floor(square.position.x) ] ) {
-					return false ;
-				} else {
-					return true ;
-				};
-				
+				return square.position.y < track[ Math.floor(square.position.x) ] ||
+					 square.position.y < track[ Math.floor(square.position.x + square.width) ] ;
 			};
 
 		};
