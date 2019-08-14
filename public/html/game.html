@@ -63,9 +63,9 @@
 
 
 			atlas = Atlas();
-			atlasHelper = AtlasHelper( scene );
+			atlas.initVectors();
 
-			atlasHelper.init( atlas.getArrays() );
+			atlasHelper = AtlasHelper( scene );
 
 
 			loop();
