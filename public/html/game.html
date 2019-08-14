@@ -31,6 +31,7 @@
 
 	<script src="./js/Atlas.js"></script>
 	<script src="./js/AtlasHelper.js"></script>
+	<script src="./js/SquareHelper.js"></script>
 
 </head>
 
@@ -68,8 +69,11 @@
 			atlas = Atlas();
 			atlas.initVectors();
 
-			helper = AtlasHelper( atlas.pointsArrays );
-			scene.add( helper );
+			atlasHelper = AtlasHelper( atlas.pointsArrays );
+			scene.add( atlasHelper );
+
+			square = atlas.LogicSquare( 0.5, 0.5 );
+			squareHelper = SquareHelper( square );
 
 
 			loop();

@@ -1,13 +1,15 @@
 
 function Atlas() {
 
+
 	// ATLAS ARRAYS
 	// these arrays hold the height of individual steps in the track
-	const d0 = [ 0, 0, 0, 1, 1, 0, 0, 0 ]; // RED
-	const d1 = [ 1, 1, 0, 0, 1, 2, 1, 2 ]; // BLUE
-	const d2 = [ 0, 0, 0, 1, 2, 3, 0, 1 ]; // GREEN
+	const d0 = [ 0, 0, 0, 0.5, 1, 0, 0, 0, 1, 2, 3, 4, 4, 4 ]; // RED
+	const d1 = [ 1, 1, 0, 0, 1, 2, 1, 1, 0.5, 2, 3, 3, 0.5, 2 ]; // BLUE
+	const d2 = [ 0, 0, 0.5, 1, 1.5, 3, 0, 0, 1, 1, 2, 2, 2, 2 ]; // GREEN
 
 	var pointsArrays = [];
+
 
 	// initVectors() transforms the atlas arrays (d0, d1 and d2),
 	// into arrays of THREE.Vector3.
@@ -29,20 +31,26 @@ function Atlas() {
 
 
 
-	function getIDs( d ) {
-		switch (d) {
-			case 0 : return d0 ;
-			case 1 : return d1 ;
-			case 2 : return d2 ;
+	// LogicCube is an abstrac class, used to compute colisions
+	// with the atlas.
+	function LogicSquare( width, height, position ) {
+
+		position = position || new THREE.Vector3();
+
+		return {
+			width,
+			height,
+			position
 		};
 	};
 
 
 
+
 	return {
-		getIDs,
 		initVectors,
-		pointsArrays
+		pointsArrays,
+		LogicSquare
 	};
 
 };

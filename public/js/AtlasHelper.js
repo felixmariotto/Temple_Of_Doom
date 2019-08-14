@@ -1,4 +1,6 @@
 
+// AtlasHelper returns a group containing collections of THREE.Line
+// to help visualise the world atlas.
 function AtlasHelper( pointsArrays ) {
 
 	let group = new THREE.Group();
