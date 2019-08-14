@@ -2,8 +2,7 @@
 function SquareHelper( logicSquare ) {
 
 	let group = new THREE.Group();
-	group.caca = logicSquare.position;
-	group.position = group.caca;
+	group.position = logicSquare.position;
 	group.position.y += logicSquare.offsetY;
 
 	var material = new THREE.LineBasicMaterial({
