@@ -39,7 +39,7 @@ function Atlas() {
 
 
 
-	// LogicCube is an abstrac class, used to compute colisions
+	// LogicCube is an abstrac class, used to compute collisions
 	// with the atlas.
 	function LogicSquare( width, height, position ) {
 
@@ -114,7 +114,24 @@ function Atlas() {
 
 
 		function shift( increment ) {
-			this.move( 0, 0, increment );
+
+			if ( !isInside( this, tracks[ this.position.z + increment ] ) ) {
+				this.move( 0, 0, increment );
+			};
+
+			function isInside( square, track ) {
+				// Si la hauteur de mon coin gauche est supérieur à la hauteur
+				// de la dalle sur laquelle je suis, true
+				console.log( square.position.y );
+				console.log( track[ Math.floor(square.position.x) ] );
+				if ( square.position.y >= track[ Math.floor(square.position.x) ] ) {
+					return false ;
+				} else {
+					return true ;
+				};
+				
+			};
+
 		};
 
 
