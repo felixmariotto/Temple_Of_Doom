@@ -77,6 +77,8 @@ function Atlas() {
 
 
 	function testCollision( logicSquare, track ) {
+
+		/*
 		// Quelle est la hauteur de la marche sur laquelle
 		// l'angle bas-gauche se trouve ?
 			// La hauteur de l'angle bas-gauche est-elle moindre
@@ -91,6 +93,17 @@ function Atlas() {
 		logicSquare.collision.right = heightCurrentStepRight - heightSquare ;
 
 		console.log( logicSquare.collision )
+		*/
+
+
+		// VERSION WITHOUT VARIABLE DECLARATION
+		logicSquare.collision.left = track[ Math.floor(logicSquare.position.x) ] -
+									 logicSquare.position.y ;
+
+		logicSquare.collision.right = track[ Math.floor(logicSquare.position.x +
+															logicSquare.width) ] -
+									  logicSquare.position.y ;
+
 	};
 
 
