@@ -57,6 +57,17 @@ function Atlas() {
 				this.helper.position.z += z ;
 			};
 
+			if ( this.camera ) {
+				this.camera.position.x += x ;
+				// this.camera.position.y += y ;
+				// this.camera.position.z += z ;
+				this.camera.lookAt(
+					this.position.x,
+					this.position.y + 2,
+					this.position.z
+					);
+			};
+
 			testCollision( this, tracks[ this.position.z ] );
 		};
 
@@ -67,7 +78,8 @@ function Atlas() {
 			position,
 			collision,
 			move,
-			helper:undefined
+			helper:undefined,
+			camera: undefined,
 		};
 	};
 

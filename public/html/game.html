@@ -68,10 +68,10 @@
 			scene.background = new THREE.Color(0x555555);
 
 			camera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 1, 100 );
-			camera.position.z = 20;
-			camera.lookAt( 0, 0, 0 );
+			camera.position.set( -1, 3, 20)
+			camera.lookAt( 0, 2, 0 );
 
-			controls = new THREE.OrbitControls( camera, document.body );
+			// controls = new THREE.OrbitControls( camera, document.body );
 
 			renderer = new THREE.WebGLRenderer({antialias:true, canvas:document.getElementById('world')});
 			renderer.setSize( window.innerWidth, window.innerHeight );
@@ -85,6 +85,7 @@
 
 			square = atlas.LogicSquare( 0.5, 0.5 );
 			square.helper = SquareHelper( square );
+			square.camera = camera ;
 			scene.add( square.helper );
 
 			charaControl = CharaControl( square );
