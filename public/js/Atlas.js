@@ -12,6 +12,8 @@ function Atlas() {
 	const chaserTrack = [ 2, 2, 2,  2, 2, 2, 2, 1.75, 1.5,  1,    1,    0.75, 1,   1, 2,    1,   1, 1.5, 2, 3,    3.5, 4, 4, 3.5, 3,  3, 3,  3, 3,  4,   4.5, 2.5, 4,   1.5, 2,   2.5,   2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 4.5, 4,   3.5, 4.5, 5,   5,   5.5, 6,   6.5, 8,  8, 9.5, 9.5, 11, 11, 12.5, 12.5, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14  ]
 	const tracks = [ d0, d1, d2 ];
 
+	const CAMERAVEC = new THREE.Vector3( -1, 2, 19 );
+
 	var pointsArrays = [];
 	var isFlying ;
 	var tempObstacles = [];
@@ -113,6 +115,17 @@ function Atlas() {
 
 
 
+
+		function moveTo( vec ) {
+			this.position.copy( vec );
+			this.helper.position.copy( vec );
+			this.camera.position
+						.copy( CAMERAVEC )
+						.add( vec );
+		};
+
+
+
 		// step() make the character step over an obstacle,
 		// it is called by the Controler loop with a t argument
 		// representing the time on the animation, between 0 and 1;
@@ -189,6 +202,7 @@ function Atlas() {
 			position,
 			collision,
 			move,
+			moveTo,
 			shift,
 			step,
 			isFlying,

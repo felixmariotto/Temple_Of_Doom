@@ -3,6 +3,10 @@
 function Game() {
 
 
+	const PLAYERSPAWNVEC = new THREE.Vector3( 6, 3, 1 ) ;
+	// const PLAYERSPAWNVEC = new THREE.Vector3(57, 9, 1)
+
+
 	function fail() {
 		console.log('fail');
 		restartGame();
@@ -17,11 +21,7 @@ function Game() {
 	function restartGame() {
 		chaser.stop();
 		chaser.group.position.copy( chaser.params.startVec );
-		square.position.copy( PLAYERSTARTVEC );
-		square.helper.position.copy( PLAYERSTARTVEC );
-		square.camera.position
-						.copy( CAMERAVEC )
-						.add( PLAYERSTARTVEC )
+		square.moveTo( PLAYERSPAWNVEC );
 	};
 
 	return {
