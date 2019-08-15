@@ -7,7 +7,7 @@ function Controler( logicSquare ) {
 	const RUNSPEED = 0.035 ;
 	const LEAPSPEED = 0.1 ;
 	const LEAPPOWER = 0.3 ;
-	const FALLSPEED = -0.1 ;
+	const FALLSPEED = -0.2 ;
 
 	var run = 0 ;
 	var leap = 0 ;
@@ -19,6 +19,8 @@ function Controler( logicSquare ) {
 	var mustStep = false ;
 	var steppingTimeout = 0 ;
 	var stepDirection;
+
+	var fallRatio = 0 ;
 
 
 
@@ -86,34 +88,10 @@ function Controler( logicSquare ) {
 
 		///// Actions handling
 
-		// we check if steppingTimeout < 1 because running
-		// must not occur when the character is stepping
-		if ( run != 0 && steppingTimeout < 1 ) {
-			walk( run );
-		};
-
-
-		if ( leap > 0 ) {
-			leap += LEAPSPEED ;
-			leapLevel = Math.sin( leap );
-			if ( leap < 1.5 ) {
-				leapOffset( 1 - leapLevel );
-			};
-			
-			if ( leap > 1.5 ) leap = 0 ;
-		};
-
-
-		if ( leap == 0 ) {
-			if ( square.isFlying() ) {
-				fall();
-			};
-		};
-
 
 		// This statement occur after the player has malked against a steppable
 		// ostacle during some time, represented by steppingTimeout.
-		if ( steppingTimeout > 1 ) {
+		if ( steppingTimeout >= 1 ) {
 			
 			// steppingTimeout is reused to play the stepping action.
 			// mustStep is re-set to true, is case the player stopped
@@ -140,6 +118,38 @@ function Controler( logicSquare ) {
 			steppingTimeout = 0 ;
 		};
 
+
+
+		// we check if steppingTimeout < 1 because running
+		// must not occur when the character is stepping
+		if ( run != 0 && steppingTimeout < 1 ) {
+			walk( run );
+		};
+
+
+		if ( leap > 0 ) {
+			leap += LEAPSPEED ;
+			leapLevel = Math.sin( leap );
+			if ( leap < 1.5 ) {
+				leapOffset( 1 - leapLevel );
+			};
+			
+			if ( leap > 1.5 ) leap = 0 ;
+		};
+
+
+		if ( leap == 0 &&
+			 square.isFlying() &&
+			 steppingTimeout < 1 ) {
+
+			fallRatio = fallRatio >= 1 ? 1 : fallRatio + 0.1 ;
+			fall();
+
+		} else {
+			fallRatio = 0 ;
+		};
+		
+
 	};
 
 
@@ -160,11 +170,18 @@ function Controler( logicSquare ) {
 			// the half of its height, then the square is set to step this step
 			if ( (square.height - square.collision.right) >= square.height/2 &&
 				 (square.height - square.collision.left) >= square.height/2 ) {
+
 				mustStep = true ;
 				stepDirection = square.collision.right > 0 ? 'right' : 'left';
 			};
 
 			square.move( - offset, 0, 0 );
+
+			// start the stepping action whatever steppingTimeout hold,
+			// to act as if the character catch an edge after jumbing
+			if ( square.isFlying() && mustStep && steppingTimeout < 1 ) {
+				steppingTimeout = 1 ;
+			};
 		};
 	};
 
@@ -178,7 +195,9 @@ function Controler( logicSquare ) {
 
 
 	function fall() {
-		square.move( 0, FALLSPEED, 0 );
+
+		square.move( 0, FALLSPEED * fallRatio, 0 );
+
 		// keep the cube from entering the ground
 		if ( square.collision.right > 0 ) {
 			square.move( 0, square.collision.right, 0 );
