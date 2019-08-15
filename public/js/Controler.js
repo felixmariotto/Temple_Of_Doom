@@ -158,7 +158,8 @@ function Controler( logicSquare ) {
 
 			// If the step facing the square is smaller than half or equal to
 			// the half of its height, then the square is set to step this step
-			if ( (square.height - square.collision.right) >= square.height/2 ) {
+			if ( (square.height - square.collision.right) >= square.height/2 &&
+				 (square.height - square.collision.left) >= square.height/2 ) {
 				mustStep = true ;
 				stepDirection = square.collision.right > 0 ? 'right' : 'left';
 			};
