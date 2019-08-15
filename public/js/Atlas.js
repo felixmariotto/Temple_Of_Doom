@@ -33,7 +33,7 @@ function Atlas() {
 		};
 
 		let helper = needHelper ? new THREE.Group() : undefined ;
-		const offsetVec = new THREE.Vector3( 0.5, 0.5, 0.5 );
+		const offsetVec = new THREE.Vector3( 0.5, 0, 0.5 );
 
 		if ( helper ) {
 
@@ -48,6 +48,7 @@ function Atlas() {
 				mesh.position.z = 1 ;
 			};
 			mesh.position.add( offsetVec );
+			mesh.position.y -= 40 ;
 
 			scene.add( mesh );
 			tempObstacles.push( tempObstacle );
