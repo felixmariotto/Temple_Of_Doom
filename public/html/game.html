@@ -34,6 +34,7 @@
 	<script src="./js/SquareHelper.js"></script>
 	<script src="./js/Keys.js"></script>
 	<script src="./js/Controler.js"></script>
+	<script src="./js/SceneGenerator.js"></script>
 
 </head>
 
@@ -46,7 +47,7 @@
 		
 		var scene, camera, renderer, controls, stats ;
 		var atlas, square, squareHelper;
-		var controler, keys;
+		var controler, keys, sceneGenerator;
 
 
 
@@ -83,6 +84,14 @@
 
 			atlas = Atlas();
 			atlas.initVectors();
+
+			sceneGenerator = SceneGenerator();
+
+			let colorArray = [ "red", "blue", "green" ]
+			atlas.pointsArrays.forEach( (points, i)=> {
+				sceneGenerator.createShape( points, colorArray[i] );
+			});
+			// sceneGenerator.createShape( atlas.pointsArrays[0] );
 
 			let atlasHelper = AtlasHelper( atlas.pointsArrays );
 			scene.add( atlasHelper );
