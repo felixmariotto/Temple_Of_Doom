@@ -2,7 +2,7 @@
 function Chaser( logicCube, needHelper ) {
 
 
-	const SPEED = 0.03 ;
+	const SPEED = 0.031 ;
 	const STARTVEC = new THREE.Vector3( 0, 2, 1);
 
 	var group = new THREE.Group();

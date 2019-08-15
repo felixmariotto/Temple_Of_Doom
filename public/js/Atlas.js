@@ -51,6 +51,7 @@ function Atlas() {
 
 
 		function move( x, y, z ) {
+
 			this.position.x += x ;
 			this.position.y += y ;
 			this.position.z += z ;
@@ -155,7 +156,7 @@ function Atlas() {
 			shift,
 			step,
 			isFlying,
-			helper:undefined,
+			helper: undefined,
 			camera: undefined,
 		};
 	};

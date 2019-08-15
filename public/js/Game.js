@@ -2,12 +2,19 @@
 
 function Game() {
 
+
 	function fail() {
 		console.log('fail');
-		restart();
+		restartGame();
 	};
 
-	function restart() {
+
+	function start() {
+		chaser.start();
+	};
+
+
+	function restartGame() {
 		chaser.stop();
 		chaser.group.position.copy( chaser.params.startVec );
 		square.position.copy( PLAYERSTARTVEC );
@@ -18,6 +25,7 @@ function Game() {
 	};
 
 	return {
-		fail
+		fail,
+		start
 	};
 };
