@@ -37,6 +37,7 @@
 	<script src="./js/SceneGenerator.js"></script>
 	<script src="./js/Chaser.js"></script>
 	<script src="./js/Game.js"></script>
+	<script src="./js/Startup.js"></script>
 
 </head>
 
@@ -52,7 +53,8 @@
 		var controler, keys, sceneGenerator, chaser, game;
 
 
-		const PLAYERSTARTVEC = new THREE.Vector3( 6, 2, 1 ) ;
+		// const PLAYERSTARTVEC = new THREE.Vector3( 6, 2, 1 ) ;
+		const PLAYERSTARTVEC = new THREE.Vector3( 20, 5, 1 ) ;
 		const CAMERAVEC = new THREE.Vector3( -1, 2, 19 );
 
 		// const PLAYERSTARTVEC = new THREE.Vector3(57, 9, 1)
@@ -89,13 +91,14 @@
 
 
 
+			atlas = Atlas();
+			atlas.initVectors();
+
 			game = Game();
+			Startup() ;
 
 			keys = Keys();
 			keys.init();
-
-			atlas = Atlas();
-			atlas.initVectors();
 
 			sceneGenerator = SceneGenerator();
 
