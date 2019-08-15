@@ -4,7 +4,7 @@ function Atlas() {
 
 	// ATLAS ARRAYS
 	// these arrays hold the height of individual steps in the track
-	const d0 = [ 0, 0, 0, 0.5, 1, 0, 0, 0, 1, 2, 3, 4, 4, 4 ]; // RED
+	const d0 = [ 0, 0, 0.25, 0.5, 1, 0.75, 0.5, 0, 1, 2, 3, 4, 4, 4 ]; // RED
 	const d1 = [ 1, 1, 0, 0, 1, 2, 1, 1, 0.5, 2, 3, 3, 0.5, 2 ]; // BLUE
 	const d2 = [ 0, 0, 0.5, 1, 1.5, 3, 0, 0, 1, 1, 2, 2, 2, 2 ]; // GREEN
 	const tracks = [ d0, d1, d2 ];
@@ -72,6 +72,15 @@ function Atlas() {
 
 
 
+		// step() make the character step over an obstacle,
+		// it is called by the Controler loop with a t argument
+		// representing the time on the animation, between 0 and 1;
+		function step( t, direction ) {
+			this.move( 0.01 * ( direction == 'right' ? 1 : -1 ) , ( collision[ direction ] * t ) + 0.01, 0 );
+		};
+
+
+
 		function isFlying() {
 			
 			/*
@@ -113,6 +122,7 @@ function Atlas() {
 		};
 
 
+		// shit() make the square change of atlas track
 		function shift( increment ) {
 
 			if ( !isInside( this, tracks[ this.position.z + increment ] ) ) {
@@ -136,6 +146,7 @@ function Atlas() {
 			collision,
 			move,
 			shift,
+			step,
 			isFlying,
 			helper:undefined,
 			camera: undefined,

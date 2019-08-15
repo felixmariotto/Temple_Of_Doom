@@ -16,6 +16,10 @@ function Controler( logicSquare ) {
 	var hasShifted = false ;
 	var hasJumped = false ;
 
+	var mustStep = false ;
+	var steppingTimeout = 0 ;
+	var stepDirection;
+
 
 
 
@@ -29,7 +33,11 @@ function Controler( logicSquare ) {
 		// If neither right nor left arrow is pressed, character is stilled.
 		if ( (keys.isPressed.left && keys.isPressed.right) ||
 			 (!keys.isPressed.left && !keys.isPressed.right) ) {
+			// make the character still
 			run = 0 ;
+			// If the player does not push an arrow, the character
+			// will not step over a step.
+			mustStep = false ;
 		} else if ( keys.isPressed.left ) {
 			run = -RUNSPEED ;
 		} else if ( keys.isPressed.right ) {
@@ -78,7 +86,9 @@ function Controler( logicSquare ) {
 
 		///// Actions handling
 
-		if ( run != 0 ) {
+		// we check if steppingTimeout < 1 because running
+		// must not occur when the character is stepping
+		if ( run != 0 && steppingTimeout < 1 ) {
 			walk( run );
 		};
 
@@ -100,19 +110,64 @@ function Controler( logicSquare ) {
 			};
 		};
 
+
+		// This statement occur after the player has malked against a steppable
+		// ostacle during some time, represented by steppingTimeout.
+		if ( steppingTimeout > 1 ) {
+			
+			// steppingTimeout is reused to play the stepping action.
+			// mustStep is re-set to true, is case the player stopped
+			// walking, to make this action unavoidable once started.
+			if ( steppingTimeout - 1 < 2 ) {
+				square.step( (steppingTimeout - 1) / 2, stepDirection );
+				mustStep = true ;
+
+			// reset all the stepping variable, the action is finished
+			} else {
+				steppingTimeout = 0 ;
+				mustStep = false ;
+			};
+		};
+
+
+		// if mustStep is true, it means that the player is walking against a
+		// steppable obstacle. steppingTimeout in incremented, so that when it
+		// reach a given value, the stepping action will occur.
+		// If mustStep is false, steppingTimeout is reset.
+		if ( mustStep ) {
+			steppingTimeout += 0.15 ;
+		} else {
+			steppingTimeout = 0 ;
+		};
+
 	};
 
 
 
 	function walk( offset ) {
+
 		square.move( offset, 0, 0 );
+
+		// set mustStep to its default, it will be set again to true in the
+		// next statement if needed
+		mustStep = false ;
+
 		// keep the cube from entering a wall
 		if ( (offset > 0 && square.collision.right > 0) ||
 			 (offset < 0 && square.collision.left > 0) ) {
 
+			// If the step facing the square is smaller than half or equal to
+			// the half of its height, then the square is set to step this step
+			if ( (square.height - square.collision.right) >= square.height/2 ) {
+				mustStep = true ;
+				stepDirection = square.collision.right > 0 ? 'right' : 'left';
+			};
+
 			square.move( - offset, 0, 0 );
 		};
 	};
+
+
 
 
 	function leapOffset( offset ) {
