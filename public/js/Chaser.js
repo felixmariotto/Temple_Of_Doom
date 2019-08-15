@@ -3,21 +3,23 @@ function Chaser( needHelper ) {
 
 
 	const SPEED = 0.03 ;
-
-	var params = {
-		position: 0,
-		isRunning: false
-	};
+	const STARTVEC = new THREE.Vector3( 0, 2, 1);
 
 	var group = new THREE.Group();
-	group.position.z = 1 ;
+	group.position.copy( STARTVEC );
 	scene.add( group );
+
+	var params = {
+		isRunning: false,
+		startVec: STARTVEC
+	};
 
 
 	if ( needHelper ) {
 		var geometry = new THREE.BoxBufferGeometry( 4, 7, 2.3 );
 		var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 		var cube = new THREE.Mesh( geometry, material );
+		cube.position.x = -2 ;
 		group.add( cube );
 	};
 
@@ -25,8 +27,7 @@ function Chaser( needHelper ) {
 
 	function update() {
 		if ( params.isRunning ) {
-			params.position += SPEED ;
-			group.position.x = params.position ;
+			group.position.x += SPEED ;
 			// This statement return a linear interpolation between two points
 			// in the chaser track, so its Y position vary smoothly
 			group.position.y = THREE.Math.lerp(
@@ -41,10 +42,17 @@ function Chaser( needHelper ) {
 		params.isRunning = true;
 	};
 
+	function stop() {
+		params.isRunning = false;
+	};
+
 
 	return {
 		update,
-		start
+		start,
+		stop,
+		group,
+		params
 	};
 
 };
