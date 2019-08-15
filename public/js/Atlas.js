@@ -3,10 +3,10 @@ function Atlas() {
 
 
 	// ATLAS ARRAYS
-	// these arrays hold the height of individual steps in the track
-	const d0 = [ 0, 0, 0, 0.5, 1, 0, 0, 0, 1, 2, 3, 4, 4, 4 ]; // RED
-	const d1 = [ 1, 1, 0, 0, 1, 2, 1, 1, 0.5, 2, 3, 3, 0.5, 2 ]; // BLUE
-	const d2 = [ 0, 0, 0.5, 1, 1.5, 3, 0, 0, 1, 1, 2, 2, 2, 2 ]; // GREEN
+	// these arrays hold the height of individual steps in the tracks
+	const d0 = [ 10, 2, 2, 2, 2, 2,    1.75, 1.5,  1.25, 1,   0.5, 1, 0.75, 0.5, 0, 1,   2, 3,    4,   4, 4, 4, 10, 4, 10, 4, 10, 6,   5.5, 5,   4.5, 3, 2.5, 2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  3,   6,   6,   3.5, 6, 6,   5.5, 5.5, 15, 6.5, 15, 8, 20,  11,  11, 11, 30,   12.5  ]; // RED
+	const d1 = [ 10, 2, 3, 2, 2, 1.75, 1.5,  1.25, 0.5,  0.5, 1,   2, 3,    0.5, 2, 2.5, 3, 3.5,  3.5, 4, 4, 4, 4,  4, 4,  4, 4,  4.5, 4.5, 4.5, 4,   0, 0, 2.5,   2.5, 2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 2.5, 5,   3.5, 3, 5.5, 5.5, 5.5, 6,  6.5, 8,  8, 9.5, 9.5, 30, 11, 12.5, 12.5 ]; // BLUE
+	const d2 = [ 10, 2, 2, 2, 2, 1,    1,    0.5,  0.5,  0.5, 0.5, 0, 0,    1,   1, 1,   1, 2.25, 3,   4, 4, 3, 2,  1, 1,  1, 1,  4,   3.5, 3.5, 3,   0, 0, 2.5,   2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 2.5, 3, 3.5, 3.5, 5.5, 6,  6.5, 8,  8, 20,  9.5, 11, 11, 30,   12.5  ]; // GREEN
 	const tracks = [ d0, d1, d2 ];
 
 	var pointsArrays = [];
@@ -60,6 +60,7 @@ function Atlas() {
 
 			if ( this.camera ) {
 				this.camera.position.x += x ;
+				this.camera.position.y += y ;
 				this.camera.lookAt(
 					this.position.x,
 					this.position.y + 2,
@@ -68,6 +69,15 @@ function Atlas() {
 			};
 
 			testCollision( this, tracks[ this.position.z ] );
+		};
+
+
+
+		// step() make the character step over an obstacle,
+		// it is called by the Controler loop with a t argument
+		// representing the time on the animation, between 0 and 1;
+		function step( t, direction ) {
+			this.move( 0.01 * ( direction == 'right' ? 1 : -1 ) , ( collision[ direction ] * t ) + 0.01, 0 );
 		};
 
 
@@ -113,11 +123,15 @@ function Atlas() {
 		};
 
 
+		// shit() make the square change of atlas track
 		function shift( increment ) {
 
 			if ( !isInside( this, tracks[ this.position.z + increment ] ) ) {
 				this.move( 0, 0, increment );
-			};
+				return true ;
+			} else {
+				return false ;
+			}
 
 			// isInside returns true if the square would be inside the passed track
 			// if it was transposed to it without any more movement.
@@ -136,6 +150,7 @@ function Atlas() {
 			collision,
 			move,
 			shift,
+			step,
 			isFlying,
 			helper:undefined,
 			camera: undefined,
