@@ -27,6 +27,11 @@ function Atlas() {
 	// spanning over the 3 tracks
 	function TempObstacle( name, vec, needHelper ) {
 
+		let tempObstacle = {
+			name,
+			vec
+		};
+
 		let helper = needHelper ? new THREE.Group() : undefined ;
 		const offsetVec = new THREE.Vector3( 0.5, 0.5, 0.5 );
 
@@ -45,12 +50,10 @@ function Atlas() {
 			mesh.position.add( offsetVec );
 
 			scene.add( mesh );
+			tempObstacles.push( tempObstacle );
 		};
 
-		return {
-			name,
-			vec
-		};
+		return tempObstacle ;
 	};
 
 
@@ -110,7 +113,14 @@ function Atlas() {
 					);
 			};
 
+			// collide with the atlas
 			testCollision( this, tracks[ this.position.z ] );
+			
+			// collide with the temporary obstacles
+			tempObstacles.forEach( (tempObstacle)=> {
+				testCollisionTemp( this, tempObstacle );
+			});
+
 		};
 
 
@@ -123,6 +133,7 @@ function Atlas() {
 						.copy( CAMERAVEC )
 						.add( vec );
 		};
+
 
 
 
@@ -244,6 +255,30 @@ function Atlas() {
 									  logicSquare.position.y ;
 
 	};
+
+
+
+
+	// testCollisionTemp update logicSquare.collision if the square traverse
+	// a temporary obstacle bigger than the atlas
+	function testCollisionTemp( logicSquare, tempObstacle ) {
+		
+		// Angle droit de trouve sur l'obstacle
+		if ( Math.floor(logicSquare.position.x + logicSquare.width) == tempObstacle.vec.x ) {
+
+			if ( logicSquare.collision.right < ( tempObstacle.vec.y - logicSquare.position.y ) ) {
+				logicSquare.collision.right = ( tempObstacle.vec.y - logicSquare.position.y )
+			};
+
+		// Angle gauche de trouve sur l'obstacle
+		} else if ( Math.floor(logicSquare.position.x) == tempObstacle.vec.x ) {
+
+			if ( logicSquare.collision.left < ( tempObstacle.vec.y - logicSquare.position.y ) ) {
+				logicSquare.collision.left = ( tempObstacle.vec.y - logicSquare.position.y )
+			};
+		};
+	};
+
 
 
 
