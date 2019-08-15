@@ -45,8 +45,6 @@ function Keys() {
 				isPressed.space = bool ;
 			break;
 		};
-
-		console.log( isPressed );
 	};
 
 
