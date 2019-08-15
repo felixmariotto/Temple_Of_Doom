@@ -27,6 +27,8 @@ function Chaser( needHelper ) {
 		if ( params.isRunning ) {
 			params.position += SPEED ;
 			group.position.x = params.position ;
+			// This statement return a linear interpolation between two points
+			// in the chaser track, so its Y position vary smoothly
 			group.position.y = THREE.Math.lerp(
 				atlas.chaserTrack[ Math.floor(group.position.x) ],
 				atlas.chaserTrack[ Math.ceil(group.position.x) ],
