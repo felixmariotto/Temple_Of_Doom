@@ -60,16 +60,14 @@ function Controler( logicSquare ) {
 		} else if ( hasShifted == false && keys.isPressed.up ) {
 
 			if ( square.position.z > 0 ) {
-				square.shift( -1 );
+				hasShifted = square.shift( -1 ) ;
 			};
-			hasShifted = true ;
 
 		} else if ( hasShifted == false && keys.isPressed.down ) {
 
 			if ( square.position.z < 2 ) {
-				square.shift( 1 );
+				hasShifted = square.shift( 1 ) ;
 			};
-			hasShifted = true ;
 		};
 
 
@@ -89,7 +87,7 @@ function Controler( logicSquare ) {
 		///// Actions handling
 
 
-		// This statement occur after the player has malked against a steppable
+		// This statement occur after the player has walked against a steppable
 		// ostacle during some time, represented by steppingTimeout.
 		if ( steppingTimeout >= 1 ) {
 			
@@ -113,7 +111,7 @@ function Controler( logicSquare ) {
 		// reach a given value, the stepping action will occur.
 		// If mustStep is false, steppingTimeout is reset.
 		if ( mustStep ) {
-			steppingTimeout += 0.15 ;
+			steppingTimeout += 0.2 ;
 		} else {
 			steppingTimeout = 0 ;
 		};

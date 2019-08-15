@@ -127,7 +127,10 @@ function Atlas() {
 
 			if ( !isInside( this, tracks[ this.position.z + increment ] ) ) {
 				this.move( 0, 0, increment );
-			};
+				return true ;
+			} else {
+				return false ;
+			}
 
 			// isInside returns true if the square would be inside the passed track
 			// if it was transposed to it without any more movement.
