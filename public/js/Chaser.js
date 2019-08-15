@@ -1,5 +1,5 @@
 
-function Chaser( needHelper ) {
+function Chaser( logicCube, needHelper ) {
 
 
 	const SPEED = 0.03 ;
@@ -34,6 +34,11 @@ function Chaser( needHelper ) {
 				atlas.chaserTrack[ Math.floor(group.position.x) ],
 				atlas.chaserTrack[ Math.ceil(group.position.x) ],
 				group.position.x - Math.floor(group.position.x) );
+
+			// check for collision with the player
+			if ( logicCube.position.x < group.position.x ) {
+				game.fail();
+			};
 		};
 	};
 
