@@ -4,9 +4,9 @@ function Atlas() {
 
 	// ATLAS ARRAYS
 	// these arrays hold the height of individual steps in the track
-	const d0 = [ 0, 0, 0.25, 0.5, 1, 0.75, 0.5, 0, 1, 2, 3, 4, 4, 4 ]; // RED
-	const d1 = [ 1, 1, 0, 0, 1, 2, 1, 1, 0.5, 2, 3, 3, 0.5, 2 ]; // BLUE
-	const d2 = [ 0, 0, 0.5, 1, 1.5, 3, 0, 0, 1, 1, 2, 2, 2, 2 ]; // GREEN
+	const d0 = [ 2, 2, 2, 2,    1.75, 1.5,  1.25, 1,   0.5, 1, 0.75, 0.5, 0, 1,   2, 3,   4,   4, 4 ]; // RED
+	const d1 = [ 2, 2, 2, 1.75, 1.5,  1.25, 0.5,  0.5, 1,   2, 3,    0.5, 2, 2.5, 3, 3.5, 3.5, 4, 4 ]; // BLUE
+	const d2 = [ 2, 2, 2, 1,    1,    0.5,  0.5,  0.5, 0.5, 0, 0,    1,   1, 1,   1, 2,   3,   4, 4 ]; // GREEN
 	const tracks = [ d0, d1, d2 ];
 
 	var pointsArrays = [];
@@ -60,6 +60,7 @@ function Atlas() {
 
 			if ( this.camera ) {
 				this.camera.position.x += x ;
+				this.camera.position.y += y ;
 				this.camera.lookAt(
 					this.position.x,
 					this.position.y + 2,

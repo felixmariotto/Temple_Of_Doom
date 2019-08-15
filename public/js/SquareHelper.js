@@ -2,7 +2,7 @@
 function SquareHelper( logicSquare ) {
 
 	let group = new THREE.Group();
-	group.position = logicSquare.position;
+	group.position.copy( logicSquare.position );
 
 	var material = new THREE.LineBasicMaterial({
 		color: 0xffffff
