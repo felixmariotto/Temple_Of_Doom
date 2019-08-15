@@ -51,9 +51,9 @@
 		var controler, keys, sceneGenerator, chaser;
 
 
-		// const STARTVEC = new THREE.Vector3(4, 2, 1)
+		const STARTVEC = new THREE.Vector3(4, 2, 1)
 
-		const STARTVEC = new THREE.Vector3(55, 7, 1)
+		// const STARTVEC = new THREE.Vector3(55, 7, 1)
 
 
 		window.addEventListener('load', ()=> {
@@ -76,7 +76,7 @@
 						.add( STARTVEC )
 			camera.lookAt( 0, 2, 0 );
 
-			controls = new THREE.OrbitControls( camera, document.body );
+			// controls = new THREE.OrbitControls( camera, document.body );
 
 			renderer = new THREE.WebGLRenderer({antialias:true, canvas:document.getElementById('world')});
 			renderer.setSize( window.innerWidth, window.innerHeight );
@@ -111,6 +111,9 @@
 			controler = Controler( square );
 
 			chaser = Chaser( true );
+			setTimeout( ()=> {
+				chaser.start();
+			}, 1000);
 
 			loop();
 		};
