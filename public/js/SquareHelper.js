@@ -11,11 +11,11 @@ function SquareHelper( logicSquare ) {
 	var geometry = new THREE.Geometry();
 
 	geometry.vertices.push(
-		new THREE.Vector3( logicSquare.height, 0, 0 ),
-		new THREE.Vector3( logicSquare.height, logicSquare.width, 0 ),
-		new THREE.Vector3( 0, logicSquare.width, 0 ),
+		new THREE.Vector3( logicSquare.width, 0, 0 ),
+		new THREE.Vector3( logicSquare.width, logicSquare.height, 0 ),
+		new THREE.Vector3( 0, logicSquare.height, 0 ),
 		new THREE.Vector3( 0, 0, 0 ),
-		new THREE.Vector3( logicSquare.height, 0, 0 )
+		new THREE.Vector3( logicSquare.width, 0, 0 )
 	);
 	
 	var line = new THREE.Line( geometry, material );
