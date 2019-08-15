@@ -32,7 +32,7 @@
 	<script src="./js/Atlas.js"></script>
 	<script src="./js/AtlasHelper.js"></script>
 	<script src="./js/SquareHelper.js"></script>
-	<script src="./js/CharaControl.js"></script>
+	<script src="./js/Keys.js"></script>
 	<script src="./js/Controler.js"></script>
 
 </head>
@@ -46,7 +46,7 @@
 		
 		var scene, camera, renderer, controls, stats ;
 		var atlas, square, squareHelper;
-		var charaControl;
+		var controler, keys;
 
 
 
@@ -78,7 +78,8 @@
 			document.body.appendChild( stats.dom );
 
 
-
+			keys = Keys();
+			keys.init();
 
 			atlas = Atlas();
 			atlas.initVectors();
