@@ -15,6 +15,7 @@ function Game() {
 
 	function start() {
 		chaser.start();
+		atlas.removeTempObstacle( 'init_wall' );
 	};
 
 

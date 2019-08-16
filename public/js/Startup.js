@@ -6,7 +6,7 @@ function Startup() {
 
 	atlas.TempObstacle(
 		"init_wall",
-		new THREE.Vector3( 22, 5, 4 ),
+		new THREE.Vector3( 22, 15, 4 ),
 		true
 	);
 

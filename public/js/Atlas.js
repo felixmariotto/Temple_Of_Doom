@@ -32,10 +32,13 @@ function Atlas() {
 			vec
 		};
 
-		let helper = needHelper ? new THREE.Group() : undefined ;
-		const offsetVec = new THREE.Vector3( 0.5, 0, 0.5 );
+		tempObstacles.push( tempObstacle );
 
+		let helper = needHelper ? new THREE.Group() : undefined ;
+		
 		if ( helper ) {
+
+			const offsetVec = new THREE.Vector3( 0.5, 0, 0.5 );
 
 			let isSpanning = vec.z > 2 ;
 			let depth = isSpanning ? 3 : 1 ;
@@ -51,10 +54,32 @@ function Atlas() {
 			mesh.position.y -= 40 ;
 
 			scene.add( mesh );
-			tempObstacles.push( tempObstacle );
+
+			tempObstacle.helper = mesh ;
 		};
 
 		return tempObstacle ;
+	};
+
+
+
+
+	// remove a tempObstacle from tempsObstacles array and from the scene,
+	// and free memory.
+	function removeTempObstacle( name ) {
+
+		let tempObstacle = tempObstacles.find( (tempObstacle)=> {
+			return tempObstacle.name == name ;
+		});
+
+		if ( tempObstacle ) {
+			tempObstacles.splice( tempObstacles.indexOf( tempObstacle ), 1 );
+			if ( tempObstacle.helper ) {
+				scene.remove( tempObstacle.helper );
+				tempObstacle.helper.geometry.dispose();
+				tempObstacle.helper.material.dispose();
+			};
+		};
 	};
 
 
@@ -290,7 +315,8 @@ function Atlas() {
 		pointsArrays,
 		LogicSquare,
 		chaserTrack,
-		TempObstacle
+		TempObstacle,
+		removeTempObstacle
 	};
 
 };
