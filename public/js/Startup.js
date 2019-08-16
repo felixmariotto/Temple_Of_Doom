@@ -11,10 +11,21 @@ function Startup() {
 		true
 	);
 
+	createChaserWall();
+
+	function createChaserWall() {
+		atlas.TempObstacle(
+			"chaser_wall",
+			new THREE.Vector3( 6, 15, 4 ),
+			true
+		);
+	};
+
 	square.moveTo( PLAYERSTARTVEC );
 
 	return {
-		startButtonPos: STARTBUTTONPOS
+		startButtonPos: STARTBUTTONPOS,
+		createChaserWall
 	};
 
 };

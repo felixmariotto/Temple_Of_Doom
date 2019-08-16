@@ -23,6 +23,8 @@ function Controler( logicSquare ) {
 
 	var fallRatio = 0 ;
 
+	// var movementEnabled = true ;
+
 
 
 
@@ -30,67 +32,75 @@ function Controler( logicSquare ) {
 
 		///// Actions starting
 
-		// If both right and left arrows are pressed, character is stilled,
-		// but if right or left arrow is pressed alone, 'run' variable is
-		// set, so the character start moving next time 'run' is checked.
-		// If neither right nor left arrow is pressed, character is stilled.
-		if ( (keys.isPressed.left && keys.isPressed.right) ||
-			 (!keys.isPressed.left && !keys.isPressed.right) ) {
-			// make the character still
-			run = 0 ;
-			// If the player does not push an arrow, the character
-			// will not step over a step.
-			mustStep = false ;
-		} else if ( keys.isPressed.left ) {
-			run = -RUNSPEED ;
-		} else if ( keys.isPressed.right ) {
-			run = RUNSPEED ;
-		};
+		if ( this.movementEnabled ) {
 
-
-		// If both up en down arrows are either not pressed or both pressed,
-		// 'hasShifted' variable is set to false, so the character can shift
-		// once again. If one of these arrow is pressed, and 'hasShifted' is
-		// true, then the character is shifted. This is intended to keep the
-		// user from shifting too much by mistake.
-		if ( (keys.isPressed.up && keys.isPressed.down) ||
-			 (!keys.isPressed.up && !keys.isPressed.down) ) {
-
-			hasShifted = false ;
-
-		} else if ( hasShifted == false && keys.isPressed.up ) {
-
-			if ( square.position.z > 0 ) {
-				hasShifted = square.shift( -1 ) ;
+			// If both right and left arrows are pressed, character is stilled,
+			// but if right or left arrow is pressed alone, 'run' variable is
+			// set, so the character start moving next time 'run' is checked.
+			// If neither right nor left arrow is pressed, character is stilled.
+			if ( (keys.isPressed.left && keys.isPressed.right) ||
+				 (!keys.isPressed.left && !keys.isPressed.right) ) {
+				// make the character still
+				run = 0 ;
+				// If the player does not push an arrow, the character
+				// will not step over a step.
+				mustStep = false ;
+			} else if ( keys.isPressed.left ) {
+				run = -RUNSPEED ;
+			} else if ( keys.isPressed.right ) {
+				run = RUNSPEED ;
 			};
 
-		} else if ( hasShifted == false && keys.isPressed.down ) {
 
-			if ( square.position.z < 2 ) {
-				hasShifted = square.shift( 1 ) ;
+			// If both up en down arrows are either not pressed or both pressed,
+			// 'hasShifted' variable is set to false, so the character can shift
+			// once again. If one of these arrow is pressed, and 'hasShifted' is
+			// true, then the character is shifted. This is intended to keep the
+			// user from shifting too much by mistake.
+			if ( (keys.isPressed.up && keys.isPressed.down) ||
+				 (!keys.isPressed.up && !keys.isPressed.down) ) {
+
+				hasShifted = false ;
+
+			} else if ( hasShifted == false && keys.isPressed.up ) {
+
+				if ( square.position.z > 0 ) {
+					hasShifted = square.shift( -1 ) ;
+				};
+
+			} else if ( hasShifted == false && keys.isPressed.down ) {
+
+				if ( square.position.z < 2 ) {
+					hasShifted = square.shift( 1 ) ;
+				};
 			};
+
+
+
+			if ( keys.isPressed.space ) {
+				
+				// check if the player want to start the game
+				if ( logicSquare.position.x < startup.startButtonPos + 0.25 &&
+					 logicSquare.position.x > startup.startButtonPos - 0.1 ) {
+						
+					game.start();
+
+				} else if ( hasJumped == false && leap == 0 &&
+							!square.isFlying() ) {
+
+					leap = LEAPSPEED;
+					hasJumped = true ;
+				};
+
+			} else {
+				hasJumped = false ;
+			};
+
 		};
 
+		
 
-
-		if ( keys.isPressed.space ) {
-			
-			// check if the player want to start the game
-			if ( logicSquare.position.x < startup.startButtonPos + 0.25 &&
-				 logicSquare.position.x > startup.startButtonPos - 0.1 ) {
-					
-				game.start();
-
-			} else if ( hasJumped == false && leap == 0 &&
-						!square.isFlying() ) {
-
-				leap = LEAPSPEED;
-				hasJumped = true ;
-			};
-
-		} else {
-			hasJumped = false ;
-		};
+		
 
 
 
@@ -218,7 +228,8 @@ function Controler( logicSquare ) {
 
 
 	return {
-		update
+		update,
+		movementEnabled: true
 	};
 
 };

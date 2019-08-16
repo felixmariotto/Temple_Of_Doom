@@ -14,13 +14,26 @@ function Game() {
 
 
 	function start() {
+
 		chaser.start();
 		atlas.removeTempObstacle( 'init_wall' );
+		controler.movementEnabled = false ;
+
+		// wall opens
+		setTimeout( ()=> {
+			atlas.removeTempObstacle( 'chaser_wall' );
+		}, 500);
+
+		// player can run
+		setTimeout( ()=> {
+			controler.movementEnabled = true ;
+		}, 2500);
 	};
 
 
 	function restartGame() {
 		chaser.stop();
+		startup.createChaserWall();
 		chaser.group.position.copy( chaser.params.startVec );
 		square.moveTo( PLAYERSPAWNVEC );
 	};
