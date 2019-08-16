@@ -44,7 +44,7 @@ function Atlas() {
 			let depth = isSpanning ? 3 : 1 ;
 
 			let geom = new THREE.BoxBufferGeometry( 1, 80, depth );
-			let mesh = new THREE.Mesh( geom, new THREE.MeshBasicMaterial({color:0xff00ff}) );
+			let mesh = new THREE.Mesh( geom, new THREE.MeshLambertMaterial({color:0xff00ff}) );
 
 			mesh.position.copy(vec) ;
 			if ( isSpanning ) {

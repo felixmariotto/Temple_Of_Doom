@@ -82,7 +82,7 @@ function SceneGenerator( pointsArrays ) {
 
 		shapes.forEach( (shape, i)=> {
 			let geometry = new THREE.ExtrudeBufferGeometry( shape, extrudeSettings );
-			let material = new THREE.MeshBasicMaterial( { color:TRACKSCOLORS[i] } );
+			let material = new THREE.MeshLambertMaterial( { color:TRACKSCOLORS[i] } );
 			let mesh = new THREE.Mesh( geometry, material ) ;
 			mesh.position.z = i ;
 			mesh.rotation.z = Math.PI / 2 ;
