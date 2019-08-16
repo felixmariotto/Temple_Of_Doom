@@ -73,7 +73,7 @@
 
 			camera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 1, 100 );
 
-			controls = new THREE.OrbitControls( camera, document.body );
+			// controls = new THREE.OrbitControls( camera, document.body );
 
 			renderer = new THREE.WebGLRenderer({antialias:true, canvas:document.getElementById('world')});
 			renderer.setSize( window.innerWidth, window.innerHeight );
@@ -122,7 +122,7 @@
 				charaSprite = spriteMixer.ActionSprite( texture, 4, 8 );
 				charaSprite.setFrame( 0 );
 
-				charaSprite.scale.set( 10, 10, 1 );
+				charaSprite.scale.set( 2, 2, 1 );
 				scene.add( charaSprite );
 
 			})
