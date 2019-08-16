@@ -50,7 +50,7 @@
 		
 		var scene, camera, renderer, controls, stats ;
 		var atlas, square, squareHelper;
-		var controler, keys, sceneGenerator, chaser, game;
+		var controler, keys, sceneGenerator, chaser, game, startup;
 
 		
 		window.addEventListener('load', ()=> {
@@ -105,7 +105,7 @@
 			chaser = Chaser( square, true );
 
 			game = Game();
-			Startup() ;
+			startup = Startup() ;
 
 			loop();
 		};

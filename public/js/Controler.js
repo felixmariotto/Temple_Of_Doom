@@ -76,8 +76,8 @@ function Controler( logicSquare ) {
 		if ( keys.isPressed.space ) {
 			
 			// check if the player want to start the game
-			if ( logicSquare.position.x < 5.25 &&
-				 logicSquare.position.x > 4.9 ) {
+			if ( logicSquare.position.x < startup.startButtonPos + 0.25 &&
+				 logicSquare.position.x > startup.startButtonPos - 0.1 ) {
 					
 				game.start();
 
