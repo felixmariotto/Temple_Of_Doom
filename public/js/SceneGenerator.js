@@ -1,19 +1,23 @@
 
-function SceneGenerator() {
+function SceneGenerator( pointsArrays ) {
 
 
-	// createShape() takes the array of points representing one dimension
-	// in the game, and one color to apply to the shape.
-	// It create new points between each existing point to create the steps,
+	const TRACKSCOLORS = [ "red", "blue", "green" ];
+
+	var newPointsArrays = [];
+
+	var shiftLeftVec = new THREE.Vector3( 1, 0, 0 );
+	var shiftBottomVec = new THREE.Vector3( 0, -20, 0 );
+
+
+
+	// This create new points between each existing point to create the steps,
 	// and add two points very low to make the shape visible on the bottom
 	// of the atlas.
-	function createShape( points, color ) {
-
-		let shiftLeftVec = new THREE.Vector3( 1, 0, 0 );
-		let shiftBottomVec = new THREE.Vector3( 0, -20, 0 );
+	pointsArrays.forEach( (points)=> {
 
 		let newArr = points.reduce( (accu, value, i, arr)=> {
-			
+		
 			accu.push(value);
 			accu.push( new THREE.Vector3()
 									.copy( value )
@@ -38,9 +42,21 @@ function SceneGenerator() {
 
 		}, []);
 
-		var heartShape = new THREE.Shape( newArr );
+		newPointsArrays.push( newArr );
 
-		var geometry = new THREE.ShapeGeometry( heartShape );
+	});
+
+
+
+
+
+	// createShape() takes the array of points representing one dimension
+	// in the game, and one color to apply to the shape.
+	function createShape( points, color ) {
+
+		var shape = new THREE.Shape( points );
+
+		var geometry = new THREE.ShapeGeometry( shape );
 		var material = new THREE.MeshBasicMaterial( { color: color } );
 		var mesh = new THREE.Mesh( geometry, material ) ;
 		mesh.position.z = points[0].z ;
@@ -48,8 +64,31 @@ function SceneGenerator() {
 		scene.add( mesh );
 	};
 
+
+
+
+	function generateShapes() {
+		
+		newPointsArrays.forEach( (points, i)=> {
+			createShape( points, TRACKSCOLORS[i] );
+		});
+	};
+
+
+
+
+	function generateExtrusions() {
+		console.log('generate extrusion');
+	};
+
+
+
+
+
 	return {
-		createShape
+		createShape,
+		generateShapes,
+		generateExtrusions
 	};
 
 };

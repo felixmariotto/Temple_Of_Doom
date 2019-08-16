@@ -83,13 +83,9 @@
 			keys = Keys();
 			keys.init();
 
-			sceneGenerator = SceneGenerator();
-
-			let colorArray = [ "red", "blue", "green" ]
-			atlas.pointsArrays.forEach( (points, i)=> {
-				sceneGenerator.createShape( points, colorArray[i] );
-			});
-			// sceneGenerator.createShape( atlas.pointsArrays[0] );
+			sceneGenerator = SceneGenerator( atlas.pointsArrays );
+			sceneGenerator.generateShapes();
+			// sceneGenerator.generateExtrusions();
 
 			let atlasHelper = AtlasHelper( atlas.pointsArrays );
 			scene.add( atlasHelper );
