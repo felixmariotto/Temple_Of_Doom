@@ -9,6 +9,7 @@ function Controler( logicSquare ) {
 	const LEAPSPEED = 0.1 ;
 	const LEAPPOWER = 0.3 ;
 	const FALLSPEED = -0.2 ;
+	const STEPPINGSPEED = 0.3 ;
 
 	var run = 0 ;
 	var leap = 0 ;
@@ -132,7 +133,7 @@ function Controler( logicSquare ) {
 		// reach a given value, the stepping action will occur.
 		// If mustStep is false, steppingTimeout is reset.
 		if ( mustStep ) {
-			steppingTimeout += 0.2 ;
+			steppingTimeout += STEPPINGSPEED ;
 		} else {
 			steppingTimeout = 0 ;
 		};
