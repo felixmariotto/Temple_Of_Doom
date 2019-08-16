@@ -19,6 +19,7 @@ function SquareHelper( logicSquare ) {
 	);
 	
 	var line = new THREE.Line( geometry, material );
+	line.position.z += 0.5 ;
 	group.add( line );
 
 	return group;
