@@ -4,7 +4,18 @@ function SceneGenerator( pointsArrays ) {
 
 	const TRACKSCOLORS = [ "red", "blue", "green" ];
 
-	var newPointsArrays = [];
+	const extrudeSettings = {
+			steps: 1,
+			depth: 1,
+			extrudePath: new THREE.LineCurve3(
+								new THREE.Vector3(0, 0, 0),
+								new THREE.Vector3(0, 0, 1)
+								)
+		};
+
+
+
+	var shapes = [];
 
 	var shiftLeftVec = new THREE.Vector3( 1, 0, 0 );
 	var shiftBottomVec = new THREE.Vector3( 0, -20, 0 );
@@ -42,7 +53,7 @@ function SceneGenerator( pointsArrays ) {
 
 		}, []);
 
-		newPointsArrays.push( newArr );
+		shapes.push( new THREE.Shape( newArr ) );
 
 	});
 
@@ -52,33 +63,32 @@ function SceneGenerator( pointsArrays ) {
 
 	// createShape() takes the array of points representing one dimension
 	// in the game, and one color to apply to the shape.
-	function createShape( points, color ) {
-
-		var shape = new THREE.Shape( points );
-
-		var geometry = new THREE.ShapeGeometry( shape );
-		var material = new THREE.MeshBasicMaterial( { color: color } );
-		var mesh = new THREE.Mesh( geometry, material ) ;
-		mesh.position.z = points[0].z ;
-
-		scene.add( mesh );
-	};
-
-
-
-
 	function generateShapes() {
 		
-		newPointsArrays.forEach( (points, i)=> {
-			createShape( points, TRACKSCOLORS[i] );
+		shapes.forEach( (shape, i)=> {
+			var geometry = new THREE.ShapeGeometry( shape );
+			var material = new THREE.MeshBasicMaterial( { color:TRACKSCOLORS[i] } );
+			var mesh = new THREE.Mesh( geometry, material ) ;
+			mesh.position.z = i ;
+			scene.add( mesh );
 		});
 	};
 
 
 
 
+
 	function generateExtrusions() {
-		console.log('generate extrusion');
+
+		shapes.forEach( (shape, i)=> {
+			let geometry = new THREE.ExtrudeBufferGeometry( shape, extrudeSettings );
+			let material = new THREE.MeshBasicMaterial( { color:TRACKSCOLORS[i] } );
+			let mesh = new THREE.Mesh( geometry, material ) ;
+			mesh.position.z = i ;
+			mesh.rotation.z = Math.PI / 2 ;
+			scene.add( mesh );
+		});
+
 	};
 
 
@@ -86,7 +96,6 @@ function SceneGenerator( pointsArrays ) {
 
 
 	return {
-		createShape,
 		generateShapes,
 		generateExtrusions
 	};
