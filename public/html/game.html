@@ -35,6 +35,9 @@
 	<script src="./js/Keys.js"></script>
 	<script src="./js/Controler.js"></script>
 	<script src="./js/SceneGenerator.js"></script>
+	<script src="./js/Chaser.js"></script>
+	<script src="./js/Game.js"></script>
+	<script src="./js/Startup.js"></script>
 
 </head>
 
@@ -47,21 +50,12 @@
 		
 		var scene, camera, renderer, controls, stats ;
 		var atlas, square, squareHelper;
-		var controler, keys, sceneGenerator;
+		var controler, keys, sceneGenerator, chaser, game;
 
-
-		const STARTVEC = new THREE.Vector3(4, 2, 1)
-
-		// ADVANCED POSITION
-		// const STARTVEC = new THREE.Vector3(55, 7, 1)
-
-
+		
 		window.addEventListener('load', ()=> {
 			init();
 		});
-
-
-
 
 
 
@@ -71,10 +65,6 @@
 			scene.background = new THREE.Color(0x555555);
 
 			camera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 1, 100 );
-			camera.position
-						.set( -1, 2, 19)
-						.add( STARTVEC )
-			camera.lookAt( 0, 2, 0 );
 
 			// controls = new THREE.OrbitControls( camera, document.body );
 
@@ -85,11 +75,13 @@
 			document.body.appendChild( stats.dom );
 
 
-			keys = Keys();
-			keys.init();
+
 
 			atlas = Atlas();
 			atlas.initVectors();
+
+			keys = Keys();
+			keys.init();
 
 			sceneGenerator = SceneGenerator();
 
@@ -102,15 +94,18 @@
 			let atlasHelper = AtlasHelper( atlas.pointsArrays );
 			scene.add( atlasHelper );
 
-			square = atlas.LogicSquare( 0.5, 0.75, STARTVEC );
-			
-			console.log(square);
+			square = atlas.LogicSquare( 0.5, 0.75 );
 
 			square.helper = SquareHelper( square );
 			square.camera = camera ;
 			scene.add( square.helper );
 
 			controler = Controler( square );
+
+			chaser = Chaser( square, true );
+
+			game = Game();
+			Startup() ;
 
 			loop();
 		};
@@ -122,6 +117,7 @@
 			renderer.render( scene, camera );
 			stats.update();
 			controler.update();
+			chaser.update();
 		};
 
 

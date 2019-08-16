@@ -4,13 +4,58 @@ function Atlas() {
 
 	// ATLAS ARRAYS
 	// these arrays hold the height of individual steps in the tracks
-	const d0 = [ 10, 2, 2, 2, 2, 2,    1.75, 1.5,  1.25, 1,   0.5, 1, 0.75, 0.5, 0, 1,   2, 3,    4,   4, 4, 4, 10, 4, 10, 4, 10, 6,   5.5, 5,   4.5, 3, 2.5, 2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  3,   6,   6,   3.5, 6, 6,   5.5, 5.5, 15, 6.5, 15, 8, 20,  11,  11, 11, 30,   12.5  ]; // RED
-	const d1 = [ 10, 2, 3, 2, 2, 1.75, 1.5,  1.25, 0.5,  0.5, 1,   2, 3,    0.5, 2, 2.5, 3, 3.5,  3.5, 4, 4, 4, 4,  4, 4,  4, 4,  4.5, 4.5, 4.5, 4,   0, 0, 2.5,   2.5, 2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 2.5, 5,   3.5, 3, 5.5, 5.5, 5.5, 6,  6.5, 8,  8, 9.5, 9.5, 30, 11, 12.5, 12.5 ]; // BLUE
-	const d2 = [ 10, 2, 2, 2, 2, 1,    1,    0.5,  0.5,  0.5, 0.5, 0, 0,    1,   1, 1,   1, 2.25, 3,   4, 4, 3, 2,  1, 1,  1, 1,  4,   3.5, 3.5, 3,   0, 0, 2.5,   2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 2.5, 3, 3.5, 3.5, 5.5, 6,  6.5, 8,  8, 20,  9.5, 11, 11, 30,   12.5  ]; // GREEN
+																														// trap hole							// trap little hole							// columns slalom				// climbing backward					// big climbing											// leap																																												
+	const d0 =          [ 2, 2, 10, 2, 2, 2, 2, 2,    1.75, 1.5,  1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 3.5, 4,    4, 4, 4, 4,   10, 4,   10, 4,   10, 6,   5.5, 5,   4.5, 3,   2.5, 2.5,   2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  3,   6,   6,   3.5, 6,   6,   6,   6,   15,  6.5, 15, 8, 20,  11,  11, 11, 30,   12.5, 14, 14, 14, 0,  0,  0,  0,  0,  0,  0,  14, 35, 14, 14, 14, 35, 14, 14  ]; // RED
+	const d1 =          [ 2, 2, 10, 2, 3, 2, 2, 1.75, 1.5,  1.25, 0.5,  0.5,  1,    2,    3,    0.5,  2,    2.5,  3,   3.5,  4, 4, 4, 4,   4,  4,   4,  4,   4,  4.5, 4.5, 4.5, 4,   0,   0,   2.5,   2.5, 2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 2.5, 5,   3.5, 3,   5.5, 6,   6,   6.5, 7,   8,  8, 9.5, 9.5, 30, 11, 12.5, 12.5, 35, 14, 14, 14, 0,  14, 0,  14, 0,  14, 14, 14, 14, 35, 14, 14, 14, 14 ]; // BLUE
+	const d2 =          [ 2, 2, 10, 2, 2, 2, 2, 1,    1,    0.5,  0.5,  0.5,  0.5,  0,    0,    0.5,  1,    1,    1,   2.25, 3, 4, 4, 3.5, 3,  2.5, 2,  1.5, 1,  4,   3.5, 3.5, 3,   0,   0,   2.5,   2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 15,  2.5, 2.5, 2.5, 2.5, 3,   3.5, 3.5, 5.5, 6,   6.5, 8,  8, 20,  9.5, 11, 11, 30,   12.5, 14, 14, 14, 0,  0,  0,  0,  0,  0,  9,  10, 11, 12, 13, 14, 35, 14, 14  ]; // GREEN
+	
+	const chaserTrack = [ 2, 2, 2,  2, 2, 2, 2, 1.75, 1.5,  1,    1,    0.75, 1,   1, 2,    1,   1, 1.5, 2, 3,    3.5, 4, 4, 3.5, 3,  3, 3,  3, 3,  4,   4.5, 2.5, 4,   1.5, 2,   2.5,   2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 4.5, 4,   3.5, 4.5, 5,   5,   5.5, 6,   6.5, 8,  8, 9.5, 9.5, 11, 11, 12.5, 12.5, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14  ]
 	const tracks = [ d0, d1, d2 ];
+
+	const CAMERAVEC = new THREE.Vector3( -1, 2, 19 );
 
 	var pointsArrays = [];
 	var isFlying ;
+	var tempObstacles = [];
+
+
+
+
+	// TempObstacle creates a temporary obstacle against which
+	// logicSquare.move() check collision, in addition to the atlas.
+	// If vec.z is higher than 2, the tempObstacle is considered
+	// spanning over the 3 tracks
+	function TempObstacle( name, vec, needHelper ) {
+
+		let tempObstacle = {
+			name,
+			vec
+		};
+
+		let helper = needHelper ? new THREE.Group() : undefined ;
+		const offsetVec = new THREE.Vector3( 0.5, 0, 0.5 );
+
+		if ( helper ) {
+
+			let isSpanning = vec.z > 2 ;
+			let depth = isSpanning ? 3 : 1 ;
+
+			let geom = new THREE.BoxBufferGeometry( 1, 80, depth );
+			let mesh = new THREE.Mesh( geom, new THREE.MeshBasicMaterial({color:0xff00ff}) );
+
+			mesh.position.copy(vec) ;
+			if ( isSpanning ) {
+				mesh.position.z = 1 ;
+			};
+			mesh.position.add( offsetVec );
+			mesh.position.y -= 40 ;
+
+			scene.add( mesh );
+			tempObstacles.push( tempObstacle );
+		};
+
+		return tempObstacle ;
+	};
 
 
 
@@ -48,6 +93,7 @@ function Atlas() {
 
 
 		function move( x, y, z ) {
+
 			this.position.x += x ;
 			this.position.y += y ;
 			this.position.z += z ;
@@ -68,8 +114,27 @@ function Atlas() {
 					);
 			};
 
+			// collide with the atlas
 			testCollision( this, tracks[ this.position.z ] );
+			
+			// collide with the temporary obstacles
+			tempObstacles.forEach( (tempObstacle)=> {
+				testCollisionTemp( this, tempObstacle );
+			});
+
 		};
+
+
+
+
+		function moveTo( vec ) {
+			this.position.copy( vec );
+			this.helper.position.copy( vec );
+			this.camera.position
+						.copy( CAMERAVEC )
+						.add( vec );
+		};
+
 
 
 
@@ -149,10 +214,11 @@ function Atlas() {
 			position,
 			collision,
 			move,
+			moveTo,
 			shift,
 			step,
 			isFlying,
-			helper:undefined,
+			helper: undefined,
 			camera: undefined,
 		};
 	};
@@ -194,11 +260,37 @@ function Atlas() {
 
 
 
+	// testCollisionTemp update logicSquare.collision if the square traverse
+	// a temporary obstacle bigger than the atlas
+	function testCollisionTemp( logicSquare, tempObstacle ) {
+		
+		// Angle droit de trouve sur l'obstacle
+		if ( Math.floor(logicSquare.position.x + logicSquare.width) == tempObstacle.vec.x ) {
+
+			if ( logicSquare.collision.right < ( tempObstacle.vec.y - logicSquare.position.y ) ) {
+				logicSquare.collision.right = ( tempObstacle.vec.y - logicSquare.position.y )
+			};
+
+		// Angle gauche de trouve sur l'obstacle
+		} else if ( Math.floor(logicSquare.position.x) == tempObstacle.vec.x ) {
+
+			if ( logicSquare.collision.left < ( tempObstacle.vec.y - logicSquare.position.y ) ) {
+				logicSquare.collision.left = ( tempObstacle.vec.y - logicSquare.position.y )
+			};
+		};
+	};
+
+
+
+
+
 
 	return {
 		initVectors,
 		pointsArrays,
-		LogicSquare
+		LogicSquare,
+		chaserTrack,
+		TempObstacle
 	};
 
 };
