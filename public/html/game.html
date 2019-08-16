@@ -28,6 +28,7 @@
 	<script src="./js/libs/three.js"></script>
 	<script src="./js/libs/stats.min.js"></script>
 	<script src="./js/libs/OrbitControls.js"></script>
+	<script src="./js/libs/SpriteMixer.js"></script>
 
 	<script src="./js/Atlas.js"></script>
 	<script src="./js/AtlasHelper.js"></script>
@@ -72,7 +73,7 @@
 
 			camera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 1, 100 );
 
-			// controls = new THREE.OrbitControls( camera, document.body );
+			controls = new THREE.OrbitControls( camera, document.body );
 
 			renderer = new THREE.WebGLRenderer({antialias:true, canvas:document.getElementById('world')});
 			renderer.setSize( window.innerWidth, window.innerHeight );
@@ -105,6 +106,31 @@
 			controler = Controler( square );
 
 			chaser = Chaser( square, true );
+
+
+
+			/// SPRITES
+
+			spriteMixer = SpriteMixer();
+
+			var loader = new THREE.TextureLoader();
+
+			var charaSprite;
+
+			loader.load( "./assets/spr_character.png", (texture)=> {
+
+				charaSprite = spriteMixer.ActionSprite( texture, 4, 8 );
+				charaSprite.setFrame( 0 );
+
+				charaSprite.scale.set( 10, 10, 1 );
+				scene.add( charaSprite );
+
+			})
+
+
+
+
+			/// START
 
 			game = Game();
 			startup = Startup() ;
