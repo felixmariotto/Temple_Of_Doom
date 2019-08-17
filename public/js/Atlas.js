@@ -139,6 +139,12 @@ function Atlas() {
 					);
 			};
 
+			if ( this.sprite ) {
+				this.sprite.position.x += x ;
+				this.sprite.position.y += y ;
+				this.sprite.position.z += z ;
+			};
+
 			// collide with the atlas
 			testCollision( this, tracks[ this.position.z ] );
 			
@@ -245,6 +251,7 @@ function Atlas() {
 			isFlying,
 			helper: undefined,
 			camera: undefined,
+			sprite: undefined
 		};
 	};
 

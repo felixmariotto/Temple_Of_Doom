@@ -10,7 +10,6 @@ function SpriteMixer() {
 	var listeners = []; // Will store the user callbacks to call upon loop, finished, etc..
 
 
-
 	var api = {
 		actionSprites: actionSprites,
 		update: update,
@@ -34,7 +33,7 @@ function SpriteMixer() {
 
 
 	// Update every stored actionSprite if needed.
-	function update( delta ) { 
+	function update( delta ) {
 		actionSprites.forEach( (actionSprite)=> {
 			if ( actionSprite.paused == false ) {
 				updateAction( actionSprite.currentAction, delta * 1000 );

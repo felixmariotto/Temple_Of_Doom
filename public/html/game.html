@@ -39,6 +39,8 @@
 	<script src="./js/Chaser.js"></script>
 	<script src="./js/Game.js"></script>
 	<script src="./js/Startup.js"></script>
+	<script src="./js/SprControler.js"></script>
+
 
 </head>
 
@@ -49,9 +51,9 @@
 
 	<script type="text/javascript">
 		
-		var scene, camera, renderer, controls, stats ;
+		var scene, camera, renderer, controls, stats, spriteMixer, clock ;
 		var atlas, square, squareHelper;
-		var controler, keys, sceneGenerator, chaser, game, startup;
+		var controler, keys, sceneGenerator, chaser, game, startup, sprControler;
 
 		
 		window.addEventListener('load', ()=> {
@@ -81,8 +83,11 @@
 			stats = new Stats();
 			document.body.appendChild( stats.dom );
 
+			clock = new THREE.Clock();
 
 
+
+			/// GAME RELATED
 
 			atlas = Atlas();
 			atlas.initVectors();
@@ -107,28 +112,7 @@
 
 			chaser = Chaser( square, true );
 
-
-
-			/// SPRITES
-
-			spriteMixer = SpriteMixer();
-
-			var loader = new THREE.TextureLoader();
-
-			var charaSprite;
-
-			loader.load( "./assets/spr_character.png", (texture)=> {
-
-				charaSprite = spriteMixer.ActionSprite( texture, 4, 8 );
-				charaSprite.setFrame( 0 );
-
-				charaSprite.scale.set( 2, 2, 1 );
-				scene.add( charaSprite );
-
-			})
-
-
-
+			sprControler = SprControler();
 
 			/// START
 
@@ -146,6 +130,7 @@
 			stats.update();
 			controler.update();
 			chaser.update();
+			spriteMixer.update( clock.getDelta() );
 		};
 
 
