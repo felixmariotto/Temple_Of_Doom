@@ -4,8 +4,9 @@ function SprControler() {
 	spriteMixer = SpriteMixer();
 	var loader = new THREE.TextureLoader();
 
+	var currentAction, currentMovement;
 	var charaSprite;
-	var currentAction, walkRight, walkLeft, idleRight, idleLeft;
+	var walkRight, walkLeft, idleRight, idleLeft;
 
 
 
@@ -40,22 +41,30 @@ function SprControler() {
 
 	function setAction( name ) {
 
+		// stop function is requested movement is the currently
+		// played one.
+		if ( this.currentMovement == name ) return
+
 		switch( name ) {
 			case 'walkLeft' :
 				walkLeft.playLoop();
 				currentAction = walkLeft ;
+				this.currentMovement = 'walkLeft';
 			break;
 			case 'walkRight' :
 				walkRight.playLoop();
 				currentAction = walkRight ;
+				this.currentMovement = 'walkRight';
 			break;
 			case 'idleLeft' :
 				idleLeft.playLoop();
 				currentAction = idleLeft ;
+				this.currentMovement = 'idleLeft';
 			break;
 			case 'idleRight' :
 				idleRight.playLoop();
 				currentAction = idleRight ;
+				this.currentMovement = 'idleLeft';
 			break;
 			case 'jumpRight' :
 				currentAction.stop();
@@ -64,6 +73,7 @@ function SprControler() {
 					currentAction.pause();
 					charaSprite.setFrame( 12 ) ;
 				}, 90);
+				this.currentMovement = 'jumpRight';
 			break;
 			case 'jumpLeft' :
 				currentAction.stop();
@@ -72,14 +82,17 @@ function SprControler() {
 					currentAction.pause();
 					charaSprite.setFrame( 13 ) ;
 				}, 90);
+				this.currentMovement = 'jumpLeft';
 			break;
 			case 'faceBack' :
 				currentAction.stop();
 				charaSprite.setFrame( 16 );
+				this.currentMovement = 'faceBack';
 			break;
 			case 'faceFront' :
 				currentAction.stop();
 				charaSprite.setFrame( 17 );
+				this.currentMovement = 'faceFront';
 			break;
 		};
 
@@ -87,21 +100,11 @@ function SprControler() {
 
 
 
-	let i = 0;
-	let arr = [ 'walkLeft', 'walkRight', 'faceBack', 'faceFront', 'idleLeft', 'idleRight', 'jumpRight', 'jumpLeft' ];
-	setInterval( ()=> {
-		i = (i +1) % 6 ;
-		setAction( arr[i] );
-	}, 700) ;
-
-
-
-
-
 
 
 	return {
-
+		setAction,
+		currentMovement
 	};
 
 };

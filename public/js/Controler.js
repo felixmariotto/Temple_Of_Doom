@@ -27,6 +27,16 @@ function Controler( logicSquare ) {
 	// var movementEnabled = true ;
 
 
+	/*
+	let i = 0;
+	let arr = [ 'walkLeft', 'walkRight', 'faceBack', 'faceFront', 'idleLeft', 'idleRight', 'jumpRight', 'jumpLeft' ];
+	setInterval( ()=> {
+		i = (i +1) % 6 ;
+		sprControler.setAction( arr[i] );
+	}, 700) ;
+	*/
+
+
 
 
 	function update() {
@@ -143,19 +153,35 @@ function Controler( logicSquare ) {
 		// we check if steppingTimeout < 1 because running
 		// must not occur when the character is stepping
 		if ( run != 0 && steppingTimeout < 1 ) {
-			walk( run );
+			if ( !logicSquare.isFlying() ) {
+				sprControler.setAction( (run > 0 ? 'walkRight' : 'walkLeft') );
 		};
+			walk( run );
+		} /* else {
+			console.log( sprControler.currentMovement ==  )
+		} */
 
 
+
+
+		// handle the leaps
 		if ( leap > 0 ) {
+
 			leap += LEAPSPEED ;
 			leapLevel = Math.sin( leap );
+
+			if ( leap == 0.2 ) {
+				sprControler.setAction( run < 0 ? 'jumpLeft' : 'jumpRight' );
+			};
+
 			if ( leap < 1.5 ) {
 				leapOffset( 1 - leapLevel );
+			} else {
+				leap = 0 ;
 			};
-			
-			if ( leap > 1.5 ) leap = 0 ;
 		};
+
+
 
 
 		if ( leap == 0 &&
