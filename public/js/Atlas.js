@@ -160,6 +160,9 @@ function Atlas() {
 				testCollisionTemp( this, tempObstacle );
 			});
 
+			// test collision with treasures
+			treasures.testCollision( this );
+
 		};
 
 

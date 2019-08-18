@@ -17,7 +17,6 @@ function Game() {
 		chaser.start();
 		atlas.removeTempObstacle( 'init_wall' );
 		controler.movementEnabled = false ;
-		gemSprite.visible = false ;
 
 		// wall opens
 		setTimeout( ()=> {
@@ -37,7 +36,7 @@ function Game() {
 		startup.createInitWall();
 		chaser.group.position.copy( chaser.params.startVec );
 		square.moveTo( PLAYERSPAWNVEC );
-		gemSprite.visible = true ;
+		treasures.findTreasure('purple_gem').sprite.visible = true ;
 	};
 
 	return {

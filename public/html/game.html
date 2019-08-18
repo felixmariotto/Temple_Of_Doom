@@ -40,6 +40,7 @@
 	<script src="./js/Game.js"></script>
 	<script src="./js/Startup.js"></script>
 	<script src="./js/SprControler.js"></script>
+	<script src="./js/Treasures.js"></script>
 
 
 </head>
@@ -52,7 +53,7 @@
 	<script type="text/javascript">
 		
 		var scene, camera, renderer, controls, stats, spriteMixer, clock ;
-		var atlas, square, squareHelper, textureLoader;
+		var atlas, square, squareHelper, textureLoader, treasures;
 		var controler, keys, sceneGenerator, chaser, game, startup, sprControler;
 		
 		window.addEventListener('load', ()=> {
@@ -117,18 +118,8 @@
 
 			sprControler = SprControler();
 
+			treasures = Treasures();
 
-
-			// TEMP
-
-			textureLoader.load('./assets/gem.png', (texture)=> {
-				texture.magFilter = THREE.NearestFilter;
-				let spriteMaterial = new THREE.SpriteMaterial({ map:texture, color:0xffffff });
-				gemSprite = new THREE.Sprite( spriteMaterial );
-				scene.add( gemSprite );
-				gemSprite.position.set( 8.5, 2.6, 1.5 );
-				gemSprite.scale.set( 0.7, 0.7, 0.7 );
-			});
 
 
 

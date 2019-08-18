@@ -84,14 +84,7 @@ function Controler( logicSquare ) {
 
 			if ( keys.isPressed.space ) {
 				
-				// check if the player want to start the game
-				if ( logicSquare.position.x < startup.startButtonPos + 0.25 &&
-					 logicSquare.position.x > startup.startButtonPos - 1.25 ) {
-						
-					game.start();
-					run = 0 ;
-
-				} else if ( hasJumped == false && leap == 0 &&
+				if ( hasJumped == false && leap == 0 &&
 							!square.isFlying() ) {
 
 					leap = LEAPSPEED;
