@@ -2,7 +2,7 @@
 
 function Startup() {
 
-	const PLAYERSTARTVEC = new THREE.Vector3( 26, 5, 1 ) ;
+	const PLAYERSTARTVEC = new THREE.Vector3( 26, 5.5, 1 ) ;
 	// const PLAYERSTARTVEC = new THREE.Vector3( 95, 30, 1 ) ;
 	const STARTBUTTONPOS = 9 ;
 

@@ -3,7 +3,7 @@
 function Game() {
 
 
-	const PLAYERSPAWNVEC = new THREE.Vector3( 10, 3, 1 ) ;
+	const PLAYERSPAWNVEC = new THREE.Vector3( 10, 4, 1 ) ;
 	// const PLAYERSPAWNVEC = new THREE.Vector3(57, 9, 1)
 
 
