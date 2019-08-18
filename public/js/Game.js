@@ -34,8 +34,10 @@ function Game() {
 	function restartGame() {
 		chaser.stop();
 		startup.createChaserWall();
+		startup.createInitWall();
 		chaser.group.position.copy( chaser.params.startVec );
 		square.moveTo( PLAYERSPAWNVEC );
+		gemSprite.visible = true ;
 	};
 
 	return {

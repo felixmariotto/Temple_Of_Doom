@@ -6,13 +6,10 @@ function Startup() {
 	// const PLAYERSTARTVEC = new THREE.Vector3( 95, 30, 1 ) ;
 	const STARTBUTTONPOS = 9 ;
 
-	atlas.TempObstacle(
-		"init_wall",
-		new THREE.Vector3( 28, 15, 4 ),
-		true
-	);
-
 	createChaserWall();
+	createInitWall();
+
+
 
 	function createChaserWall() {
 		atlas.TempObstacle(
@@ -22,11 +19,22 @@ function Startup() {
 		);
 	};
 
+	function createInitWall() {
+		atlas.TempObstacle(
+			"init_wall",
+			new THREE.Vector3( 28, 15, 4 ),
+			true
+		);
+	};
+
+
+
 	square.moveTo( PLAYERSTARTVEC );
 
 	return {
 		startButtonPos: STARTBUTTONPOS,
-		createChaserWall
+		createChaserWall,
+		createInitWall
 	};
 
 };
