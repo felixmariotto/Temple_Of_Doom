@@ -24,6 +24,8 @@ function Controler( logicSquare ) {
 
 	var fallRatio = 0 ;
 
+	var lastDirection = 'left' ;
+
 	// var movementEnabled = true ;
 
 
@@ -150,16 +152,31 @@ function Controler( logicSquare ) {
 
 
 
+
+
 		// we check if steppingTimeout < 1 because running
 		// must not occur when the character is stepping
 		if ( run != 0 && steppingTimeout < 1 ) {
+
 			if ( !logicSquare.isFlying() ) {
 				sprControler.setAction( (run > 0 ? 'walkRight' : 'walkLeft') );
-		};
+			};
+
 			walk( run );
-		} /* else {
-			console.log( sprControler.currentMovement ==  )
-		} */
+
+		} else if ( !logicSquare.isFlying() ) {
+			
+			if ( lastDirection == 'right' ) {
+
+				sprControler.setAction( 'idleRight' );
+			
+			} else {
+
+				sprControler.setAction( 'idleLeft' );
+			};
+		};
+
+
 
 
 
@@ -171,7 +188,7 @@ function Controler( logicSquare ) {
 			leapLevel = Math.sin( leap );
 
 			if ( leap == 0.2 ) {
-				sprControler.setAction( run < 0 ? 'jumpLeft' : 'jumpRight' );
+				sprControler.setAction( lastDirection == 'left' ? 'jumpLeft' : 'jumpRight' );
 			};
 
 			if ( leap < 1.5 ) {
@@ -203,6 +220,8 @@ function Controler( logicSquare ) {
 	function walk( offset ) {
 
 		square.move( offset, 0, 0 );
+
+		lastDirection = offset > 0 ? 'right' : 'left' ;
 
 		// set mustStep to its default, it will be set again to true in the
 		// next statement if needed

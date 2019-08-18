@@ -160,8 +160,9 @@ function Atlas() {
 
 		function moveTo( vec ) {
 			this.position.copy( vec );
-			this.helper.position.copy( vec );
-			this.camera.position
+			if (this.helper) this.helper.position.copy( vec );
+			if (this.sprite) this.sprite.position.copy( vec );
+			if (this.camera) this.camera.position
 						.copy( CAMERAVEC )
 						.add( vec );
 		};

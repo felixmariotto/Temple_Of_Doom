@@ -45,6 +45,7 @@ function SprControler() {
 		// played one.
 		if ( this.currentMovement == name ) return
 
+
 		switch( name ) {
 			case 'walkLeft' :
 				walkLeft.playLoop();
@@ -64,7 +65,7 @@ function SprControler() {
 			case 'idleRight' :
 				idleRight.playLoop();
 				currentAction = idleRight ;
-				this.currentMovement = 'idleLeft';
+				this.currentMovement = 'idleRight';
 			break;
 			case 'jumpRight' :
 				currentAction.stop();
