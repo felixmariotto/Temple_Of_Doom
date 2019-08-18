@@ -31,6 +31,7 @@ function Game() {
 
 
 	function restartGame() {
+		treasures.clearInventory();
 		chaser.stop();
 		startup.createChaserWall();
 		startup.createInitWall();
@@ -38,6 +39,7 @@ function Game() {
 		square.moveTo( PLAYERSPAWNVEC );
 		treasures.findTreasure('purple_gem').sprite.visible = true ;
 	};
+
 
 	return {
 		fail,

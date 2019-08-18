@@ -15,13 +15,49 @@
 
 		body {
 			overflow: hidden;
+			font-family: custom;
+		}
+
+		@font-face {
+			font-family: custom;
+			src: url(./assets/Golden_Age.ttf);
+		}
+
+		@font-face {
+			font-family: custombold;
+			src: url(./assets/Golden_Age_Shad.ttf);
 		}
 		
 		#world {
 			height: 100%;
 			width: 100%;
-			background-color: red;
+			background-color: #8a8065;
 		}
+
+		#inventory {
+			position: fixed;
+			margin: 20px;
+			padding-left: 5px;
+			display: flex;
+			flex-direction: row-reverse;
+			background-color: white;
+		}
+
+			.inventory-item {
+				position: relative;
+				height: 80px;
+				width: 80px;
+				margin: 5px 5px 5px 0px;
+				text-align: center;
+			}
+
+			#inventory-count {
+				position: relative;
+				top: 50%;
+				transform: translateY(-50%);
+				font-family: custombold;
+				font-size: 1.3em;
+			}
 
 	</style>
 
@@ -47,6 +83,12 @@
 
 
 <body>
+
+	<div id="inventory">
+		<div class="inventory-item">
+			<p id="inventory-count">0 / 10</p>
+		</div>
+	</div>
 
 	<canvas id="world"></canvas>
 
