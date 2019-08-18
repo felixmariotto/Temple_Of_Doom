@@ -70,30 +70,28 @@ function SprControler() {
 				this.currentMovement = 'idleRight';
 			break;
 			case 'jumpRight' :
-				currentAction.stop();
+				if (currentAction) currentAction.stop();
 				charaSprite.setFrame( 14 ) ;
 				setTimeout( ()=> {
-					currentAction.pause();
 					charaSprite.setFrame( 12 ) ;
 				}, 90);
 				this.currentMovement = 'jumpRight';
 			break;
 			case 'jumpLeft' :
-				currentAction.stop();
+				if (currentAction) currentAction.stop();
 				charaSprite.setFrame( 15 ) ;
 				setTimeout( ()=> {
-					currentAction.pause();
 					charaSprite.setFrame( 13 ) ;
 				}, 90);
 				this.currentMovement = 'jumpLeft';
 			break;
 			case 'faceBack' :
-				currentAction.stop();
+				if (currentAction) currentAction.stop();
 				charaSprite.setFrame( 16 );
 				this.currentMovement = 'faceBack';
 			break;
 			case 'faceFront' :
-				currentAction.stop();
+				if (currentAction) currentAction.stop();
 				charaSprite.setFrame( 17 );
 				this.currentMovement = 'faceFront';
 			break;
