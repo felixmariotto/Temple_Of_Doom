@@ -91,6 +91,7 @@ function Treasures() {
 
 		let domIMG = document.createElement( 'IMG' );
 		domIMG.classList.add( 'inventory-item' );
+		domIMG.classList.add( 'add-inventory' );
 		domIMG.src = treasure.url ;
 		domInventory.appendChild( domIMG );
 
