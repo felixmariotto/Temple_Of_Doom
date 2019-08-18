@@ -6,7 +6,6 @@ function SceneGenerator( pointsArrays ) {
 
 	const extrudeSettings = {
 			steps: 1,
-			depth: 1,
 			extrudePath: new THREE.LineCurve3(
 								new THREE.Vector3(0, 0, 0),
 								new THREE.Vector3(0, 0, 1)
@@ -19,7 +18,27 @@ function SceneGenerator( pointsArrays ) {
 
 	var shiftLeftVec = new THREE.Vector3( 1, 0, 0 );
 	var shiftBottomVec = new THREE.Vector3( 0, -20, 0 );
+	var shiftTopVec = new THREE.Vector3( 0, 20, 0 );
 
+
+	var wallsMaterial = new THREE.MeshLambertMaterial({ color: 0xf5dd90 });
+
+	var sliceMaterial = new THREE.MeshBasicMaterial( { color:0x292417 } );
+
+	/*
+	textureLoader.load( './assets/perlin-512.png', (texture)=> {
+
+		texture.wrapS = THREE.RepeatWrapping;
+		texture.wrapT = THREE.RepeatWrapping;
+		texture.repeat.set( 0.008, 0.008 );
+		texture.magFilter = THREE.NearestFilter;
+
+		wallsMaterial.map = texture ;
+		wallsMaterial.color = new THREE.Color('blue') ;
+	}, null, (err)=> {
+		throw err ;
+	});
+	*/
 
 
 	// This create new points between each existing point to create the steps,
@@ -78,16 +97,79 @@ function SceneGenerator( pointsArrays ) {
 
 
 
-	function generateExtrusions() {
+	function generateExtrusions( isTexturedMat ) {
 
 		shapes.forEach( (shape, i)=> {
+
 			let geometry = new THREE.ExtrudeBufferGeometry( shape, extrudeSettings );
-			let material = new THREE.MeshLambertMaterial( { color:TRACKSCOLORS[i] } );
+			let material = isTexturedMat ? wallsMaterial : new THREE.MeshLambertMaterial( { color:TRACKSCOLORS[i] } );
 			let mesh = new THREE.Mesh( geometry, material ) ;
 			mesh.position.z = i ;
 			mesh.rotation.z = Math.PI / 2 ;
 			scene.add( mesh );
+
+			if ( i == 2 ) {
+				var shapeGeom = new THREE.ShapeGeometry( shape );
+				var shapeMesh = new THREE.Mesh( shapeGeom, sliceMaterial ) ;
+				shapeMesh.position.z = 3.001 ;
+				scene.add( shapeMesh );
+			};
+
 		});
+
+	};
+
+
+
+
+	function generateRoof( roofLevels ) {
+
+		var points = roofLevels.reduce( (accu, value, i, arr)=> {
+
+			let point = new THREE.Vector3( i, value, 0 );
+			
+			accu.push(point);
+			accu.push( new THREE.Vector3()
+									.copy( point )
+									.add( shiftLeftVec ) );
+
+			if ( i == arr.length -1 ) {
+
+				accu.push( new THREE.Vector3()
+										.copy( accu[i*2] )
+										.add( shiftTopVec ) );
+
+				accu.push( new THREE.Vector3()
+										.copy( accu[0] )
+										.add( shiftTopVec ) );
+			};
+
+			return accu ;
+
+		}, []);
+
+		let shape = new THREE.Shape( points );
+
+
+		var settings = {
+			steps: 1,
+			extrudePath: new THREE.LineCurve3(
+								new THREE.Vector3(0, 0, 0),
+								new THREE.Vector3(0, 0, 3)
+								)
+		};
+
+		let geometry = new THREE.ExtrudeBufferGeometry( shape , settings );
+		let mesh = new THREE.Mesh( geometry, wallsMaterial ) ;
+
+		mesh.rotation.z = Math.PI / 2 ;
+		scene.add( mesh );
+
+
+		var shapeGeom = new THREE.ShapeGeometry( shape );
+		var shapeMesh = new THREE.Mesh( shapeGeom, sliceMaterial ) ;
+		shapeMesh.position.z = 3.001 ;
+		scene.add( shapeMesh );
 
 	};
 
@@ -97,7 +179,8 @@ function SceneGenerator( pointsArrays ) {
 
 	return {
 		generateShapes,
-		generateExtrusions
+		generateExtrusions,
+		generateRoof
 	};
 
 };

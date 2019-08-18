@@ -52,9 +52,8 @@
 	<script type="text/javascript">
 		
 		var scene, camera, renderer, controls, stats, spriteMixer, clock ;
-		var atlas, square, squareHelper;
+		var atlas, square, squareHelper, textureLoader;
 		var controler, keys, sceneGenerator, chaser, game, startup, sprControler;
-
 		
 		window.addEventListener('load', ()=> {
 			init();
@@ -65,7 +64,7 @@
 		function init() {
 
 			scene = new THREE.Scene();
-			scene.background = new THREE.Color(0x555555);
+			scene.background = new THREE.Color(0x403824);
 
 			var ambientlight = new THREE.AmbientLight( 0x404040, 1 );
 			var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
@@ -85,6 +84,8 @@
 
 			clock = new THREE.Clock();
 
+			textureLoader = new THREE.TextureLoader();
+
 
 
 			/// GAME RELATED
@@ -97,7 +98,8 @@
 
 			sceneGenerator = SceneGenerator( atlas.pointsArrays );
 			// sceneGenerator.generateShapes();
-			sceneGenerator.generateExtrusions();
+			sceneGenerator.generateExtrusions( true );
+			sceneGenerator.generateRoof( atlas.roof );
 
 			let atlasHelper = AtlasHelper( atlas.pointsArrays );
 			scene.add( atlasHelper );

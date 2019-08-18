@@ -2,7 +2,6 @@
 function SprControler() {
 
 	spriteMixer = SpriteMixer();
-	var loader = new THREE.TextureLoader();
 
 	var currentAction, currentMovement;
 	var charaSprite;
@@ -10,7 +9,7 @@ function SprControler() {
 
 
 
-	loader.load( "./assets/spr_character.png", (texture)=> {
+	textureLoader.load( "./assets/spr_character.png", (texture)=> {
 
 		texture.magFilter = THREE.NearestFilter;
 
