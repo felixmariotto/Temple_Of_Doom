@@ -27,7 +27,7 @@ function Game() {
 		// player can run
 		setTimeout( ()=> {
 			controler.movementEnabled = true ;
-		}, 2500);
+		}, 0); // was 2500
 	};
 
 

@@ -4,7 +4,7 @@ function Chaser( logicCube, needHelper ) {
 
 	// const SPEED = 0.031 ;
 	const SPEED = 0.025;
-	const STARTVEC = new THREE.Vector3( 0, 2, 1);
+	const STARTVEC = new THREE.Vector3( 4, 2, 1); // was ( 5, 2, 1)
 
 	var group = new THREE.Group();
 	group.position.copy( STARTVEC );
