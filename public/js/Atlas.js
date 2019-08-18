@@ -16,6 +16,7 @@ function Atlas() {
 	const tracks = [ d0, d1, d2 ];
 
 	const CAMERAVEC = new THREE.Vector3( -1, 2, 19 );
+	const SPRITEVEC = new THREE.Vector3( 0.25, 0.4, 0.5 );
 
 	var pointsArrays = [];
 	var isFlying ;
@@ -167,7 +168,9 @@ function Atlas() {
 		function moveTo( vec ) {
 			this.position.copy( vec );
 			if (this.helper) this.helper.position.copy( vec );
-			if (this.sprite) this.sprite.position.copy( vec );
+			if (this.sprite) this.sprite.position
+						.copy( SPRITEVEC )
+						.add( vec );
 			if (this.camera) this.camera.position
 						.copy( CAMERAVEC )
 						.add( vec );

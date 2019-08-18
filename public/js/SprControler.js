@@ -23,6 +23,8 @@ function SprControler() {
 		charaSprite.position.x += 0.25;
 		square.sprite = charaSprite ;
 
+		
+
 		// Actions
 
 		walkLeft = spriteMixer.Action( charaSprite, 0, 3, 85 );
