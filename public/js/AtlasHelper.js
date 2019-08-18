@@ -35,6 +35,7 @@ function AtlasHelper( pointsArrays ) {
 		
 
 		var line = new THREE.Line( geometry, material );
+		line.position.z = 1 ;
 		group.add( line );
 
 	})

@@ -64,7 +64,7 @@
 		function init() {
 
 			scene = new THREE.Scene();
-			scene.background = new THREE.Color(0x403824);
+			scene.background = new THREE.Color(0x2e281a);
 
 			var ambientlight = new THREE.AmbientLight( 0x404040, 1 );
 			var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
@@ -72,7 +72,7 @@
 			scene.add( ambientlight, directionalLight );
 
 
-			camera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 1, 100 );
+			camera = new THREE.PerspectiveCamera( 20, window.innerWidth/window.innerHeight, 1, 1000 );
 
 			// controls = new THREE.OrbitControls( camera, document.body );
 

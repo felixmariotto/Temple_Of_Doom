@@ -17,8 +17,8 @@ function SceneGenerator( pointsArrays ) {
 	var shapes = [];
 
 	var shiftLeftVec = new THREE.Vector3( 1, 0, 0 );
-	var shiftBottomVec = new THREE.Vector3( 0, -20, 0 );
-	var shiftTopVec = new THREE.Vector3( 0, 20, 0 );
+	var shiftBottomVec = new THREE.Vector3( 0, -80, 0 );
+	var shiftTopVec = new THREE.Vector3( 0, 80, 0 );
 
 
 	var wallsMaterial = new THREE.MeshLambertMaterial({ color: 0xf5dd90 });
