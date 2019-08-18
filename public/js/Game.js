@@ -8,7 +8,6 @@ function Game() {
 
 
 	function fail() {
-		console.log('fail');
 		restartGame();
 	};
 

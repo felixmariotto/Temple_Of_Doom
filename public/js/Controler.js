@@ -26,17 +26,9 @@ function Controler( logicSquare ) {
 
 	var lastDirection = 'left' ;
 
-	// var movementEnabled = true ;
 
 
-	/*
-	let i = 0;
-	let arr = [ 'walkLeft', 'walkRight', 'faceBack', 'faceFront', 'idleLeft', 'idleRight', 'jumpRight', 'jumpLeft' ];
-	setInterval( ()=> {
-		i = (i +1) % 6 ;
-		sprControler.setAction( arr[i] );
-	}, 700) ;
-	*/
+
 
 
 
@@ -97,6 +89,7 @@ function Controler( logicSquare ) {
 					 logicSquare.position.x > startup.startButtonPos - 0.1 ) {
 						
 					game.start();
+					run = 0 ;
 
 				} else if ( hasJumped == false && leap == 0 &&
 							!square.isFlying() ) {
@@ -275,7 +268,7 @@ function Controler( logicSquare ) {
 
 	return {
 		update,
-		movementEnabled: true
+		movementEnabled: true,
 	};
 
 };
