@@ -37,7 +37,6 @@ function Game() {
 		startup.createInitWall();
 		chaser.group.position.copy( chaser.params.startVec );
 		square.moveTo( PLAYERSPAWNVEC );
-		treasures.findTreasure('purple_gem').sprite.visible = true ;
 	};
 
 

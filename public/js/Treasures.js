@@ -8,7 +8,15 @@ function Treasures() {
 
 
 
-	initTreasure( './assets/gem.png', 'purple_gem', [8.5, 2.6, 1.5], 0.7 );
+	initTreasure( './assets/gem.png', 'purple_gem', [8.5, 2.6, 1.5], 0.7 ); // start
+	initTreasure( './assets/gem.png', 'thing', [34.5, 6.3, 0.5], 0.7 ); // easy one after start
+	initTreasure( './assets/gem.png', 'truc', [45.5, 3.5, 0.5], 0.7 ); // behind the column
+	initTreasure( './assets/gem.png', 'red_gem', [58.5, 3.8, 2.5], 0.7 ); // bottom of run-back
+	initTreasure( './assets/gem.png', 'green_gem', [65.5, 11.8, 0.5], 0.7 ); // in the columns-stairs
+	initTreasure( './assets/gem.png', 'yellow_gem', [79.5, 11.3, 2.5], 0.7 ); // after the leaps
+	initTreasure( './assets/gem.png', 'diamond', [99.5, 13.8, 2.5], 0.7 ); // in the chamber
+	initTreasure( './assets/gem.png', 'crown', [116.5, 17.8, 0.5], 0.7 ); // in top of stairs
+	initTreasure( './assets/gem.png', 'magic_wand', [124.5, 15.3, 1.5], 0.7 ); // in bottom of stairs
 
 	
 
@@ -105,9 +113,12 @@ function Treasures() {
 		/// Reseting of treasures attributes
 
 		treasures.forEach( (treasure)=> {
+
 			if ( treasure.found ) {
 				treasure.found = false;
 			};
+
+			treasure.sprite.visible = true ;
 		});
 
 
@@ -118,12 +129,14 @@ function Treasures() {
 
 		let domElements = document.getElementsByClassName('inventory-item');
 
-		for ( let domElement of domElements ) {
+		for ( let i=domElements.length ; i>0 ; i-- ) {
 
-			if ( domElement.tagName == 'IMG' ) {
-				domInventory.removeChild( domElement );
+			if ( domElements[i] && domElements[i].tagName == 'IMG' ) {
+				domInventory.removeChild( domElements[i] );
 			};
+
 		};
+
 	};
 
 
