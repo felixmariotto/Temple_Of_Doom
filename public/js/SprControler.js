@@ -12,6 +12,8 @@ function SprControler() {
 
 	loader.load( "./assets/spr_character.png", (texture)=> {
 
+		texture.magFilter = THREE.NearestFilter;
+
 		charaSprite = spriteMixer.ActionSprite( texture, 4, 8 );
 		charaSprite.setFrame( 0 );
 
