@@ -17,6 +17,7 @@ function Game() {
 		chaser.start();
 		atlas.removeTempObstacle( 'init_wall' );
 		controler.movementEnabled = false ;
+		gemSprite.visible = false ;
 
 		// wall opens
 		setTimeout( ()=> {

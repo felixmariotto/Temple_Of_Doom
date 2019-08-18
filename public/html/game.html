@@ -116,6 +116,21 @@
 
 			sprControler = SprControler();
 
+
+
+			// TEMP
+
+			textureLoader.load('./assets/gem.png', (texture)=> {
+				texture.magFilter = THREE.NearestFilter;
+				let spriteMaterial = new THREE.SpriteMaterial({ map:texture, color:0xffffff });
+				gemSprite = new THREE.Sprite( spriteMaterial );
+				scene.add( gemSprite );
+				gemSprite.position.set( 8.5, 2.6, 1.5 );
+				gemSprite.scale.set( 0.7, 0.7, 0.7 );
+			});
+
+
+
 			/// START
 
 			game = Game();
