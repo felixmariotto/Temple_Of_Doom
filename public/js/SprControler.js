@@ -56,13 +56,13 @@ function SprControler() {
 
 		texture.magFilter = THREE.NearestFilter;
 
-		pharaohSprite = spriteMixer.ActionSprite( texture, 2, 2 );
+		pharaohSprite = spriteMixer.ActionSprite( texture, 4, 2 );
 		pharaohSprite.setFrame( 0 );
 
 		pharaohSprite.scale.set( 0.75, 0.75, 0.75 );
 		pharaohSprite.position.set( 7.5, 3.8, 1.5 );
 
-		pharaohShine = spriteMixer.Action( pharaohSprite, 1, 2, 70 );
+		pharaohShine = spriteMixer.Action( pharaohSprite, 1, 4, 70 );
 
 		scene.add( pharaohSprite );
 

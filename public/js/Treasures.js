@@ -163,7 +163,9 @@ function Treasures() {
 	return {
 		testCollision,
 		findTreasure,
-		clearInventory
+		clearInventory,
+		treasures,
+		getFoundTreasures
 	};
 
 

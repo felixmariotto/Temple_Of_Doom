@@ -192,23 +192,18 @@
 				display: none;
 			}
 
-			#end-button-container {
-				display: flex;
+			#restart-button {
+				padding: 10px;
+				border-style: solid;
+				border-width: 2px;
+				color: white;
 				margin: 30px;
 			}
 
-				#end-button-container>h2 {
-					padding: 10px;
-					border-style: solid;
-					border-width: 2px;
-					color: white;
-					margin: 10px;
-				}
-
-				#end-button-container>h2:hover {
-					background-color: white;
-					color: black;
-				}
+			#restart-button:hover {
+				background-color: white;
+				color: black;
+			}
 
 
 	</style>
@@ -279,19 +274,16 @@
 			
 			<div id="fail-menu" class="menu">
 				<h2>Game over</h2>
-				<h2>You survived during 150 seconds</h2>
+				<h2 id="fail-time-text">You survived 0 second</h2>
 			</div>
 
 			<div id="win-menu" class="menu">
 				<h2>Congratulations !</h2>
-				<h2>You finished the game in 265 seconds</h2>
-				<h2>You looted 7 / 9 gems</h2>
+				<h2 id="win-time-text">You finished the game in 265 seconds</h2>
+				<h2 id="loot-text">You looted 0 / 9 gems</h2>
 			</div>
 			
-			<div id="end-button-container">
-				<h2>< back to menu</h2>
-				<h2>restart (press space) ></h2>
-			</div>
+			<h2 id="restart-button" onclick="onClickRestart()">restart (press space) ></h2>
 
 		</div>
 	</div>
@@ -319,7 +311,8 @@
 		var scene, camera, renderer, controls, stats, spriteMixer, clock ;
 		var atlas, square, squareHelper, textureLoader, treasures;
 		var controler, keys, sceneGenerator, chaser, game, startup, sprControler;
-		var gameStarted, gamePaused;
+		var gamePaused, gameFinished;
+		var survivalTimeCounter = 0 ;
 		
 
 
@@ -354,6 +347,7 @@
 
 
 		window.addEventListener('keydown', (e)=> {
+
 			if (e.key == 'Escape') {
 				if ( gamePaused ) {
 					onClickBack();
@@ -362,6 +356,11 @@
 					pauseGame();
 				};
 			};
+
+			if (e.key == " " && gameFinished) {
+				onClickRestart();
+			};
+
 		});
 
 
@@ -372,17 +371,26 @@
 		};
 
 
+		function onClickRestart() {
+			document.getElementById('gameover-overlay').style.display = "none" ;
+			game.restartGame();
+			startGame();
+		};
+
+
 		function startGame() {
 			document.getElementById('play-button').innerHTML = 'resume (esc)';
 			document.getElementById('inventory').style.display = 'flex' ;
 			document.getElementById('title-overlay').style.display = 'none' ;
 			document.getElementById('title-overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.4)' ;
 			gamePaused = false ;
+			gameFinished = false ;
 
-			if ( !gameStarted ) {
+			if ( !scene ) {
 				init();
 			} else {
-				requestAnimationFrame( loop );
+				loop();
+				// requestAnimationFrame( loop );
 			};
 		};
 
@@ -393,8 +401,6 @@
 
 
 		function init() {
-
-			gameStarted = true;
 
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color(0x2e281a);
@@ -415,7 +421,7 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 
 			stats = new Stats();
-			document.body.appendChild( stats.dom );
+			// document.body.appendChild( stats.dom );
 
 			clock = new THREE.Clock();
 
@@ -460,7 +466,7 @@
 
 			game = Game();
 			loop();
-			
+
 		};
 
 
@@ -478,6 +484,11 @@
 				stats.update();
 
 				delta = clock.getDelta();
+
+				if ( survivalTimeCounter > 0 ) {
+					survivalTimeCounter += delta ;
+					// console.log(survivalTimeCounter)
+				};
 
 				controler.update( delta );
 				chaser.update( delta );
