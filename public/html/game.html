@@ -288,6 +288,7 @@
 		window.addEventListener('keydown', (e)=> {
 			if (e.key == 'Escape') {
 				if ( gamePaused ) {
+					onClickBack();
 					startGame();
 				} else {
 					pauseGame();
@@ -341,7 +342,8 @@
 
 			// controls = new THREE.OrbitControls( camera, document.body );
 
-			renderer = new THREE.WebGLRenderer({antialias:true, canvas:document.getElementById('world')});
+			renderer = new THREE.WebGLRenderer({ canvas:document.getElementById('world')});
+			renderer.setPixelRatio( 1 );
 			renderer.setSize( window.innerWidth, window.innerHeight );
 
 			stats = new Stats();
