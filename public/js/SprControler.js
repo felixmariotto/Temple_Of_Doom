@@ -62,7 +62,7 @@ function SprControler() {
 		pharaohSprite.scale.set( 0.75, 0.75, 0.75 );
 		pharaohSprite.position.set( 7.5, 3.8, 1.5 );
 
-		pharaohShine = spriteMixer.Action( pharaohSprite, 1, 2, 200 );
+		pharaohShine = spriteMixer.Action( pharaohSprite, 1, 2, 70 );
 
 		scene.add( pharaohSprite );
 

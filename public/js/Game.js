@@ -6,9 +6,56 @@ function Game() {
 	const PLAYERSPAWNVEC = new THREE.Vector3( 10, 4, 1 ) ;
 	// const PLAYERSPAWNVEC = new THREE.Vector3(57, 9, 1)
 
+	// const PLAYERSTARTVEC = new THREE.Vector3( 26, 5.5, 1 ) ;
+	// const PLAYERSTARTVEC = new THREE.Vector3( 135, 30, 1 ) ;
+	const PLAYERSTARTVEC = new THREE.Vector3( 11, 5, 1 ) ;
+	const STARTBUTTONPOS = 9 ;
+
+	var domGameoverOverlay = document.getElementById('gameover-overlay');
+	var domFailMenu = document.getElementById('fail-menu');
+	var domWinMenu = document.getElementById('win-menu');
+
+
+
+
+
+	square.moveTo( PLAYERSTARTVEC );
+
+	createChaserWall();
+	createInitWall();
+
+
+
+
+
+	function createChaserWall() {
+		atlas.TempObstacle(
+			"chaser_wall",
+			new THREE.Vector3( 6, 15, 4 ),
+			true
+		);
+	};
+
+	function createInitWall() {
+		atlas.TempObstacle(
+			"init_wall",
+			new THREE.Vector3( 28, 15, 4 ),
+			true
+		);
+	};
+
+
+
+
 
 	function fail() {
 		restartGame();
+	};
+
+	function win() {
+		domGameoverOverlay.style.display = "inherit";
+		domWinMenu.style.display = "inherit";
+		domFailMenu.style.display = "none";
 	};
 
 
@@ -33,14 +80,18 @@ function Game() {
 	function restartGame() {
 		treasures.clearInventory();
 		chaser.stop();
-		startup.createChaserWall();
-		startup.createInitWall();
+		createChaserWall();
+		createInitWall();
 		square.moveTo( PLAYERSPAWNVEC );
 	};
 
 
 	return {
 		fail,
-		start
+		win,
+		start,
+		startButtonPos: STARTBUTTONPOS,
+		createChaserWall,
+		createInitWall
 	};
 };

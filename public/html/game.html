@@ -11,6 +11,7 @@
 		* {
 			margin: 0px;
 			padding: 0px;
+			font-weight: 100;
 		}
 
 		body {
@@ -101,14 +102,14 @@
 			}
 
 
-		#title-overlay {
+		.overlay {
 			position: fixed;
 			height: 100%;
 			width: 100%;
 			background-color: black;
 		}
 
-			#title-bloc {
+			.bloc {
 				position: fixed;
 				top: 50%;
 				left: 50%;
@@ -145,14 +146,14 @@
 					image-rendering: pixelated;
 				}
 
-					.title-menu {
+					.menu {
 						display: inline-block;
 						border-style: solid;
 						border-color: white;
 						border-width: 2px;
 					}
 
-					.title-menu>h2 {
+					.menu>h2 {
 						margin: 30px;
 						cursor: pointer;
 					}
@@ -179,6 +180,37 @@
 							display: none;
 						}
 
+		#gameover-overlay {
+			display: none;
+		}
+
+			#fail-menu {
+				display: none;
+			}
+
+			#win-menu {
+				display: none;
+			}
+
+			#end-button-container {
+				display: flex;
+				margin: 30px;
+			}
+
+				#end-button-container>h2 {
+					padding: 10px;
+					border-style: solid;
+					border-width: 2px;
+					color: white;
+					margin: 10px;
+				}
+
+				#end-button-container>h2:hover {
+					background-color: white;
+					color: black;
+				}
+
+
 	</style>
 
 	<script src="./js/libs/three.js"></script>
@@ -194,7 +226,6 @@
 	<script src="./js/SceneGenerator.js"></script>
 	<script src="./js/Chaser.js"></script>
 	<script src="./js/Game.js"></script>
-	<script src="./js/Startup.js"></script>
 	<script src="./js/SprControler.js"></script>
 	<script src="./js/Treasures.js"></script>
 
@@ -204,8 +235,12 @@
 
 <body>
 
-	<div id="title-overlay">
-		<div id="title-bloc">
+
+
+
+	<div id="title-overlay" class="overlay">
+		<div id="title-bloc" class="bloc">
+
 			<h1>the Temple of Doom</h1>
 			<img src="./assets/title_screen.png">
 
@@ -215,28 +250,55 @@
 					<p>< back</p>
 				</h2>
 				
-				<div id="main-menu" class="title-menu">
+				<div id="main-menu" class="menu">
 					<h2 id="play-button" onclick="onClickPlay()">play</h2>
 					<h2 onclick="onClickControls()" >controls</h2>
 					<h2 onclick="onClickCredits()" >credits</h2>
 				</div>
 
-				<div id="controls-menu" class="title-menu">
+				<div id="controls-menu" class="menu">
 					<img src="./assets/controls.png">
 					<p>This game is not adapted for touchscreen</p>
 				</div>
 
-				<div id="credits-menu" class="title-menu">
+				<div id="credits-menu" class="menu">
 					<h2>Designed and created by Felix Mariotto</h2>
 				</div>
 
 			</div>
 
-			
-
 		</div>
 	</div>
 	
+
+
+
+
+	<div id="gameover-overlay" class="overlay">
+		<div id="gameover-bloc" class="bloc">
+			
+			<div id="fail-menu" class="menu">
+				<h2>Game over</h2>
+				<h2>You survived during 150 seconds</h2>
+			</div>
+
+			<div id="win-menu" class="menu">
+				<h2>Congratulations !</h2>
+				<h2>You finished the game in 265 seconds</h2>
+				<h2>You looted 7 / 9 gems</h2>
+			</div>
+			
+			<div id="end-button-container">
+				<h2>< back to menu</h2>
+				<h2>restart (press space) ></h2>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
 
 	<div id="inventory">
 		<div class="inventory-item">
@@ -244,7 +306,13 @@
 		</div>
 	</div>
 
+
+
+
 	<canvas id="world"></canvas>
+
+
+
 
 	<script type="text/javascript">
 		
@@ -391,9 +459,8 @@
 			/// START
 
 			game = Game();
-			startup = Startup() ;
-
 			loop();
+			
 		};
 
 

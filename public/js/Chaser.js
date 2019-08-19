@@ -3,7 +3,7 @@ function Chaser( logicCube, needHelper ) {
 
 
 	// const SPEED = 0.031 ;
-	const SPEED = 0.029;
+	const SPEED = 0.028;
 	const STARTVEC = new THREE.Vector3( 2.5, 2, 1.5); // was ( 5, 2, 1)
 
 	var group = new THREE.Group();
@@ -50,9 +50,9 @@ function Chaser( logicCube, needHelper ) {
 			// Update the pharaoh
 
 			if ( pharaohFollows ) {
-				pharaohVecTarget.set(
-					(group.position.x + logicCube.position.x) / 2,
-					getTrackInterpol( (group.position.x + logicCube.position.x) / 2 ),
+				pharaohVecTarget.set( 
+					THREE.Math.lerp( group.position.x, logicCube.position.x, 0.7 ),
+					getTrackInterpol( THREE.Math.lerp( group.position.x, logicCube.position.x, 0.7 ) ),
 					logicCube.position.z
 				);
 				pharaohVecTarget.y += Math.sin( Date.now() / 300 ) / 3 ;
