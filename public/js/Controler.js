@@ -33,7 +33,8 @@ function Controler( logicSquare ) {
 
 
 
-	function update() {
+	function update( delta ) {
+		
 
 		///// Actions starting
 

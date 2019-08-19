@@ -38,7 +38,7 @@
 			position: fixed;
 			margin: 20px;
 			padding-left: 5px;
-			display: flex;
+			display: none;
 			flex-direction: row-reverse;
 			background-color: white;
 		}
@@ -100,6 +100,47 @@
 				}
 			}
 
+
+		#title-overlay {
+			position: fixed;
+			height: 100%;
+			width: 100%;
+			background-color: black;
+		}
+
+			#title-bloc {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+				color: white;
+				cursor: default;
+			}
+
+				#title-bloc>img {
+					height: 20vh;
+					margin: 30px;
+					image-rendering: pixelated;
+				}
+
+				#title-menu {
+					display: inline-block;
+					border-style: solid;
+					border-color: white;
+					border-width: 2px;
+				}
+
+				#title-menu>h2 {
+					margin: 30px;
+					cursor: pointer;
+				}
+
+					#title-menu>h2:hover {
+						background-color: white;
+						color: black;
+					}
+
 	</style>
 
 	<script src="./js/libs/three.js"></script>
@@ -125,6 +166,19 @@
 
 <body>
 
+	<div id="title-overlay">
+		<div id="title-bloc">
+			<h1>the Temple of Doom</h1>
+			<img src="./assets/title_screen.png">
+			<div id="title-menu">
+				<h2 id="play-button" onclick="onClickPlay()">play</h2>
+				<h2>controls</h2>
+				<h2>credits</h2>
+			</div>
+		</div>
+	</div>
+	
+
 	<div id="inventory">
 		<div class="inventory-item">
 			<p id="inventory-count">0 / 10</p>
@@ -138,18 +192,45 @@
 		var scene, camera, renderer, controls, stats, spriteMixer, clock ;
 		var atlas, square, squareHelper, textureLoader, treasures;
 		var controler, keys, sceneGenerator, chaser, game, startup, sprControler;
+		var gameStarted, gamePaused;
 		
-		window.addEventListener('load', ()=> {
-			init();
+
+
+
+		function onClickPlay() {
+
+			document.getElementById('play-button').innerHTML = 'resume game';
+			document.getElementById('inventory').style.display = 'flex' ;
+			document.getElementById('title-overlay').style.display = 'none' ;
+			document.getElementById('title-overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.4)' ;
+			gamePaused = false ;
+
+			if ( !gameStarted ) {
+				init();
+			} else {
+				requestAnimationFrame( loop );
+			};
+		};
+
+
+
+		window.addEventListener('keydown', (e)=> {
+			if (e.key == 'Escape') {
+				document.getElementById('inventory').style.display = 'none' ;
+				document.getElementById('title-overlay').style.display = 'inherit' ;
+				gamePaused = true ;
+			};
 		});
 
 
 
 		function init() {
 
+			gameStarted = true;
+
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color(0x2e281a);
-			scene.fog = new THREE.Fog(0x000000, 16, 23); //3d3b2b
+			scene.fog = new THREE.Fog(0x000000, 16, 23);
 
 			var ambientlight = new THREE.AmbientLight( 0x404040, 1 );
 			var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
@@ -165,7 +246,7 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 
 			stats = new Stats();
-			// document.body.appendChild( stats.dom );
+			document.body.appendChild( stats.dom );
 
 			clock = new THREE.Clock();
 
@@ -216,13 +297,25 @@
 
 
 
+
+
+		var delta ;
+
 		function loop() {
-			requestAnimationFrame( loop );
-			renderer.render( scene, camera );
-			stats.update();
-			controler.update();
-			chaser.update();
-			spriteMixer.update( clock.getDelta() );
+			if ( !gamePaused ) {
+
+				requestAnimationFrame( loop );
+				renderer.render( scene, camera );
+
+				stats.update();
+
+				delta = clock.getDelta();
+
+				controler.update( delta );
+				chaser.update( delta );
+				spriteMixer.update( delta );
+
+			};
 		};
 
 

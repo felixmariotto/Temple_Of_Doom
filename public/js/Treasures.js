@@ -8,6 +8,7 @@ function Treasures() {
 
 
 
+
 	initTreasure( './assets/gem.png', 'purple_gem', [8.5, 2.6, 1.5], 0.7 ); // start
 	initTreasure( './assets/gem.png', 'thing', [34.5, 6.3, 0.5], 0.7 ); // easy one after start
 	initTreasure( './assets/gem.png', 'truc', [45.5, 3.5, 0.5], 0.7 ); // behind the column
