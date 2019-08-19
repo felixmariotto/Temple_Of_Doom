@@ -84,7 +84,7 @@ function SprControler() {
 				tentaclesSprites[i] = spriteMixer.ActionSprite( texture, 1, 2 );
 
 				tentaclesSprites[i].scale.set( 7, 7, 7 );
-				tentaclesSprites[i].position.set( 0, -1 + i, (0.5 + i) / 2 );
+				tentaclesSprites[i].position.set( 0, 0, (0.5 + i) / 2 );
 
 				tentaclesActions[i] = spriteMixer.Action( tentaclesSprites[i], 0, 1, 200 );
 				tentaclesActions[i].playLoop();
@@ -95,6 +95,8 @@ function SprControler() {
 		};
 
 	};
+
+
 
 
 
@@ -185,7 +187,8 @@ function SprControler() {
 		tentaclesGroup,
 		enablePharaoh,
 		disablePharaoh,
-		getPharaoh
+		getPharaoh,
+		tentaclesSprites
 	};
 
 };

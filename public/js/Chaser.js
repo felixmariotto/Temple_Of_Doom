@@ -43,6 +43,10 @@ function Chaser( logicCube, needHelper ) {
 				game.fail();
 			};
 
+			sprControler.tentaclesSprites[0].position.y = Math.sin( Date.now() / 350 ) / 2 ;
+			sprControler.tentaclesSprites[1].position.y = Math.sin( Date.now() / 300 ) / 2 ;
+			sprControler.tentaclesSprites[2].position.y = Math.sin( Date.now() / 250 ) / 2 ;
+
 			// Update the pharaoh
 
 			if ( pharaohFollows ) {
@@ -51,6 +55,8 @@ function Chaser( logicCube, needHelper ) {
 					getTrackInterpol( (group.position.x + logicCube.position.x) / 2 ),
 					logicCube.position.z
 				);
+				pharaohVecTarget.y += Math.sin( Date.now() / 300 ) / 3 ;
+				pharaohVecTarget.z += 0.5 ;
 				sprControler.getPharaoh().position.lerp( pharaohVecTarget, 0.05 );
 			};
 
