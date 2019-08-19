@@ -198,8 +198,29 @@
 
 
 		function onClickPlay() {
+			startGame();
+		};
 
-			document.getElementById('play-button').innerHTML = 'resume game';
+		window.addEventListener('keydown', (e)=> {
+			if (e.key == 'Escape') {
+				if ( gamePaused ) {
+					startGame();
+				} else {
+					pauseGame();
+				};
+			};
+		});
+
+
+		function pauseGame() {
+			document.getElementById('inventory').style.display = 'none' ;
+			document.getElementById('title-overlay').style.display = 'inherit' ;
+			gamePaused = true ;
+		};
+
+
+		function startGame() {
+			document.getElementById('play-button').innerHTML = 'resume (esc)';
 			document.getElementById('inventory').style.display = 'flex' ;
 			document.getElementById('title-overlay').style.display = 'none' ;
 			document.getElementById('title-overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.4)' ;
@@ -214,13 +235,7 @@
 
 
 
-		window.addEventListener('keydown', (e)=> {
-			if (e.key == 'Escape') {
-				document.getElementById('inventory').style.display = 'none' ;
-				document.getElementById('title-overlay').style.display = 'inherit' ;
-				gamePaused = true ;
-			};
-		});
+		
 
 
 
