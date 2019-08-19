@@ -118,28 +118,57 @@
 				cursor: default;
 			}
 
+				#back-container {
+					display: flex;
+					justify-content: center;
+				}
+
+					#back-button {
+						margin-right: 50px;
+						display: none;
+					}
+
+						#back-button>p {
+							border-style: solid;
+							border-width: 2px;
+							padding: 15px 20px 15px 20px;
+						}
+
+						#back-button>p:hover {
+							background-color: white;
+							color: black;
+						}
+
 				#title-bloc>img {
 					height: 20vh;
 					margin: 30px;
 					image-rendering: pixelated;
 				}
 
-				#title-menu {
-					display: inline-block;
-					border-style: solid;
-					border-color: white;
-					border-width: 2px;
-				}
-
-				#title-menu>h2 {
-					margin: 30px;
-					cursor: pointer;
-				}
-
-					#title-menu>h2:hover {
-						background-color: white;
-						color: black;
+					.title-menu {
+						display: inline-block;
+						border-style: solid;
+						border-color: white;
+						border-width: 2px;
 					}
+
+					.title-menu>h2 {
+						margin: 30px;
+						cursor: pointer;
+					}
+
+						#main-menu>h2:hover {
+							background-color: white;
+							color: black;
+						}
+
+						#controls-menu {
+							display: none;
+						}
+
+						#credits-menu {
+							display: none;
+						}
 
 	</style>
 
@@ -170,11 +199,32 @@
 		<div id="title-bloc">
 			<h1>the Temple of Doom</h1>
 			<img src="./assets/title_screen.png">
-			<div id="title-menu">
-				<h2 id="play-button" onclick="onClickPlay()">play</h2>
-				<h2>controls</h2>
-				<h2>credits</h2>
+
+			<div id="back-container">
+
+				<h2 id="back-button" onclick="onClickBack()">
+					<p>< back</p>
+				</h2>
+				
+				<div id="main-menu" class="title-menu">
+					<h2 id="play-button" onclick="onClickPlay()">play</h2>
+					<h2 onclick="onClickControls()" >controls</h2>
+					<h2 onclick="onClickCredits()" >credits</h2>
+				</div>
+
+				<div id="controls-menu" class="title-menu">
+					<h2>bla bla</h2>
+					<p>This game is not adapted for touchscreen</p>
+				</div>
+
+				<div id="credits-menu" class="title-menu">
+					<h2>Designed and created by Felix Mariotto</h2>
+				</div>
+
 			</div>
+
+			
+
 		</div>
 	</div>
 	
@@ -200,6 +250,31 @@
 		function onClickPlay() {
 			startGame();
 		};
+
+
+		function onClickBack() {
+			document.getElementById('main-menu').style.display = 'inline-block' ;
+			document.getElementById('credits-menu').style.display = 'none' ;
+			document.getElementById('controls-menu').style.display = 'none' ;
+			document.getElementById('back-button').style.display = 'none' ;
+		}
+
+
+		function onClickControls() {
+			document.getElementById('main-menu').style.display = 'none' ;
+			document.getElementById('credits-menu').style.display = 'none' ;
+			document.getElementById('controls-menu').style.display = 'inline-block' ;
+			document.getElementById('back-button').style.display = 'inline-block' ;
+		};
+
+
+		function onClickCredits() {
+			document.getElementById('main-menu').style.display = 'none' ;
+			document.getElementById('credits-menu').style.display = 'inline-block' ;
+			document.getElementById('controls-menu').style.display = 'none' ;
+			document.getElementById('back-button').style.display = 'inline-block' ;
+		};
+
 
 		window.addEventListener('keydown', (e)=> {
 			if (e.key == 'Escape') {
