@@ -18,6 +18,8 @@ function Game() {
 		atlas.removeTempObstacle( 'init_wall' );
 		controler.movementEnabled = false ;
 
+		chaser.group.add( sprControler.tentaclesGroup );
+
 		// wall opens
 		setTimeout( ()=> {
 			atlas.removeTempObstacle( 'chaser_wall' );
@@ -31,6 +33,7 @@ function Game() {
 
 
 	function restartGame() {
+		chaser.group.remove( sprControler.tentaclesGroup );
 		treasures.clearInventory();
 		chaser.stop();
 		startup.createChaserWall();

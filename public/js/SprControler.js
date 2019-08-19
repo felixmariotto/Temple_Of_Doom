@@ -4,8 +4,19 @@ function SprControler() {
 	spriteMixer = SpriteMixer();
 
 	var currentAction, currentMovement;
-	var charaSprite;
+
+	var charaSprite, pharaohSprite;
+
 	var walkRight, walkLeft, idleRight, idleLeft;
+	var pharaohShine;
+
+	var tentaclesSprites = [];
+	var tentaclesActions = [];
+	var tentaclesGroup = new THREE.Group();
+
+
+
+	createTentacles();
 
 
 
@@ -37,6 +48,72 @@ function SprControler() {
 		scene.add( charaSprite );
 
 	});
+
+
+
+
+	textureLoader.load( './assets/pharaoh.png', (texture)=> {
+
+		texture.magFilter = THREE.NearestFilter;
+
+		console.log(texture);
+
+		pharaohSprite = spriteMixer.ActionSprite( texture, 2, 2 );
+		pharaohSprite.setFrame( 0 );
+
+		pharaohSprite.scale.set( 0.75, 0.75, 0.75 );
+		pharaohSprite.position.set( 7.5, 3.8, 1.5 );
+
+		pharaohShine = spriteMixer.Action( pharaohSprite, 1, 2, 200 );
+
+		scene.add( pharaohSprite );
+
+	})
+
+
+
+
+
+
+	function createTentacles() {
+
+		for (let i=0 ; i<3 ; i++) {
+
+			textureLoader.load( './assets/tentacles.png', (texture)=> {
+
+				texture.magFilter = THREE.NearestFilter;
+
+				tentaclesSprites[i] = spriteMixer.ActionSprite( texture, 2, 1 );
+
+				tentaclesSprites[i].scale.set( 7, 7, 7 );
+				tentaclesSprites[i].position.set( 0, 2.5 + i, (0.5 + i) / 2 );
+
+				tentaclesActions[i] = spriteMixer.Action( tentaclesSprites[i], 0, 1, 200 );
+				tentaclesActions[i].playLoop();
+
+				tentaclesGroup.add( tentaclesSprites[i] );
+
+			});
+		};
+
+	};
+
+
+
+
+	function enablePharaoh() {
+		pharaohShine.playLoop();
+	};
+
+
+	function disablePharaoh() {
+		pharaohSprite.setFrame( 0 );
+	};
+
+
+	function enableMonster() {
+
+	}
 
 
 
@@ -106,7 +183,8 @@ function SprControler() {
 
 	return {
 		setAction,
-		currentMovement
+		currentMovement,
+		tentaclesGroup
 	};
 
 };

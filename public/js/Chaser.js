@@ -4,7 +4,7 @@ function Chaser( logicCube, needHelper ) {
 
 	// const SPEED = 0.031 ;
 	const SPEED = 0.029;
-	const STARTVEC = new THREE.Vector3( 4, 2, 1.5); // was ( 5, 2, 1)
+	const STARTVEC = new THREE.Vector3( 2.5, 2, 1.5); // was ( 5, 2, 1)
 
 	var group = new THREE.Group();
 	group.position.copy( STARTVEC );
@@ -17,10 +17,10 @@ function Chaser( logicCube, needHelper ) {
 
 
 	if ( needHelper ) {
-		var geometry = new THREE.BoxBufferGeometry( 4, 7, 2.5 );
-		var material = new THREE.MeshBasicMaterial( {color: 0x940a00} );
+		var geometry = new THREE.BoxBufferGeometry( 40, 50, 2.5 );
+		var material = new THREE.MeshBasicMaterial( {color: 0x000000} );
 		var cube = new THREE.Mesh( geometry, material );
-		cube.position.x = -2 ;
+		cube.position.x = -20 ;
 		group.add( cube );
 	};
 
