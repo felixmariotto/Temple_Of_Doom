@@ -83,7 +83,7 @@ function SprControler() {
 
 				texture.magFilter = THREE.NearestFilter;
 
-				tentaclesSprites[i] = spriteMixer.ActionSprite( texture, 2, 1 );
+				tentaclesSprites[i] = spriteMixer.ActionSprite( texture, 1, 2 );
 
 				tentaclesSprites[i].scale.set( 7, 7, 7 );
 				tentaclesSprites[i].position.set( 0, 2.5 + i, (0.5 + i) / 2 );
