@@ -56,8 +56,6 @@ function SprControler() {
 
 		texture.magFilter = THREE.NearestFilter;
 
-		console.log(texture);
-
 		pharaohSprite = spriteMixer.ActionSprite( texture, 2, 2 );
 		pharaohSprite.setFrame( 0 );
 
@@ -86,7 +84,7 @@ function SprControler() {
 				tentaclesSprites[i] = spriteMixer.ActionSprite( texture, 1, 2 );
 
 				tentaclesSprites[i].scale.set( 7, 7, 7 );
-				tentaclesSprites[i].position.set( 0, 2.5 + i, (0.5 + i) / 2 );
+				tentaclesSprites[i].position.set( 0, -1 + i, (0.5 + i) / 2 );
 
 				tentaclesActions[i] = spriteMixer.Action( tentaclesSprites[i], 0, 1, 200 );
 				tentaclesActions[i].playLoop();
@@ -111,9 +109,9 @@ function SprControler() {
 	};
 
 
-	function enableMonster() {
-
-	}
+	function getPharaoh() {
+		return pharaohSprite;
+	};
 
 
 
@@ -184,7 +182,10 @@ function SprControler() {
 	return {
 		setAction,
 		currentMovement,
-		tentaclesGroup
+		tentaclesGroup,
+		enablePharaoh,
+		disablePharaoh,
+		getPharaoh
 	};
 
 };
