@@ -6,9 +6,10 @@ function Game() {
 	const PLAYERSPAWNVEC = new THREE.Vector3( 10, 4, 1 ) ;
 	// const PLAYERSPAWNVEC = new THREE.Vector3(57, 9, 1)
 
-	const PLAYERSTARTVEC = new THREE.Vector3( 26, 5.5, 1 ) ;
+	// const PLAYERSTARTVEC = new THREE.Vector3( 26, 5.5, 1 ) ;
 	// const PLAYERSTARTVEC = new THREE.Vector3( 135, 30, 1 ) ;
-	// const PLAYERSTARTVEC = new THREE.Vector3( 11, 5, 1 ) ;
+	const PLAYERSTARTVEC = new THREE.Vector3( 50, 5, 1 ) ;
+
 	const STARTBUTTONPOS = 9 ;
 
 	var domGameoverOverlay = document.getElementById('gameover-overlay');
@@ -23,7 +24,7 @@ function Game() {
 	square.moveTo( PLAYERSTARTVEC );
 
 	createChaserWall();
-	createInitWall();
+	// createInitWall();
 
 
 
