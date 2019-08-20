@@ -11,7 +11,7 @@ function Game() {
 	// const PLAYERSTARTVEC = new THREE.Vector3( 135, 30, 1 ) ;
 
 
-	// const PLAYERSTARTVEC = new THREE.Vector3( 143, 15, 1 ) ;
+	// const PLAYERSTARTVEC = new THREE.Vector3( 143, 15, 1 ) ; // end
 	const PLAYERSTARTVEC = new THREE.Vector3( 41.75, 15, 1 ) ; // TRUE START
 
 	const STARTBUTTONPOS = 9 ;
@@ -22,13 +22,16 @@ function Game() {
 	var domInventory = document.getElementById('inventory');
 
 
+	var light = new THREE.PointLight( 0xf5ffff, 2, 6, 2 );
+	light.position.set( 145, 14, 1.5 );
+	scene.add( light );
 
 
 
 	square.moveTo( PLAYERSTARTVEC );
 
 	createChaserWall();
-	// createInitWall();
+	createInitWall();
 
 
 
@@ -45,7 +48,7 @@ function Game() {
 	function createInitWall() {
 		atlas.TempObstacle(
 			"init_wall",
-			new THREE.Vector3( 28, 15, 4 ),
+			new THREE.Vector3( 44, 15, 4 ),
 			true
 		);
 	};

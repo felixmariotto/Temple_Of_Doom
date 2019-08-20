@@ -142,7 +142,8 @@ function Atlas() {
 			this.position.y += y ;
 			this.position.z += z ;
 
-			console.log( 'x : ' + this.position.x.toFixed(2) + ' / y : ' + this.position.y.toFixed(2) );
+			// log current player position
+			// console.log( 'x : ' + this.position.x.toFixed(2) + ' / y : ' + this.position.y.toFixed(2) );
 
 			if ( this.helper ) {
 				this.helper.position.x += x ;
