@@ -10,14 +10,12 @@ function Treasures() {
 
 
 	initTreasure( './assets/gem.png', 'purple_gem', [8.5, 2.6, 1.5], 0.7 ); // start
-	initTreasure( './assets/gem.png', 'thing', [34.5, 6.3, 0.5], 0.7 ); // easy one after start
-	initTreasure( './assets/gem.png', 'truc', [45.5, 3.5, 0.5], 0.7 ); // behind the column
-	initTreasure( './assets/gem.png', 'red_gem', [58.5, 3.8, 2.5], 0.7 ); // bottom of run-back
-	initTreasure( './assets/gem.png', 'green_gem', [65.5, 11.8, 0.5], 0.7 ); // in the columns-stairs
-	initTreasure( './assets/gem.png', 'yellow_gem', [79.5, 11.3, 2.5], 0.7 ); // after the leaps
-	initTreasure( './assets/gem.png', 'diamond', [99.5, 13.8, 2.5], 0.7 ); // in the chamber
-	initTreasure( './assets/gem.png', 'crown', [116.5, 17.8, 0.5], 0.7 ); // in top of stairs
-	initTreasure( './assets/gem.png', 'magic_wand', [124.5, 15.3, 1.5], 0.7 ); // in bottom of stairs
+	initTreasure( './assets/gem.png', 'thing', [47.5, 2.5, 0.5], 0.7 ); // between the two walls
+	initTreasure( './assets/gem.png', 'truc', [59.5, 5.5, 0.5], 0.7 ); // in small stairs
+	initTreasure( './assets/gem.png', 'red_gem', [69.5, 8.7, 0.5], 0.7 ); // bottom big stairs
+	initTreasure( './assets/gem.png', 'green_gem', [95.5, 12.3, 2.5], 0.7 ); // first chamber
+	initTreasure( './assets/gem.png', 'yellow_gem', [109.5, 10, 2.5], 0.7 ); // second chamber
+	initTreasure( './assets/gem.png', 'diamond', [131.5, 13.8, 0.5], 0.7 ); // on column
 
 	
 

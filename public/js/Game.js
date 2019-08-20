@@ -11,8 +11,8 @@ function Game() {
 	// const PLAYERSTARTVEC = new THREE.Vector3( 135, 30, 1 ) ;
 
 
-	// const PLAYERSTARTVEC = new THREE.Vector3( 115, 15, 1 ) ;
-	const PLAYERSTARTVEC = new THREE.Vector3( 41.75, 15, 1 ) ;
+	// const PLAYERSTARTVEC = new THREE.Vector3( 143, 15, 1 ) ;
+	const PLAYERSTARTVEC = new THREE.Vector3( 41.75, 15, 1 ) ; // TRUE START
 
 	const STARTBUTTONPOS = 9 ;
 
