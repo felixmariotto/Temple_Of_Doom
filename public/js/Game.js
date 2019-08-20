@@ -6,9 +6,13 @@ function Game() {
 	const PLAYERSPAWNVEC = new THREE.Vector3( 10, 4, 1 ) ;
 	// const PLAYERSPAWNVEC = new THREE.Vector3(57, 9, 1)
 
+	// OLD STARTS
 	// const PLAYERSTARTVEC = new THREE.Vector3( 26, 5.5, 1 ) ;
 	// const PLAYERSTARTVEC = new THREE.Vector3( 135, 30, 1 ) ;
-	const PLAYERSTARTVEC = new THREE.Vector3( 50, 5, 1 ) ;
+
+
+	// const PLAYERSTARTVEC = new THREE.Vector3( 115, 15, 1 ) ;
+	const PLAYERSTARTVEC = new THREE.Vector3( 41.75, 15, 1 ) ;
 
 	const STARTBUTTONPOS = 9 ;
 

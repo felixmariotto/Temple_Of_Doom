@@ -25,6 +25,17 @@ function SceneGenerator( pointsArrays ) {
 
 	var sliceMaterial = new THREE.MeshBasicMaterial( { color:0x292417 } );
 
+
+
+	/// create water bellow y = 0 ;
+	let mesh = new THREE.Mesh( new THREE.BoxBufferGeometry(500, 100, 3),
+							   new THREE.MeshBasicMaterial({color:0x07004a}) );
+	mesh.position.y = -50 ;
+	mesh.position.z = 1.5 ;
+	scene.add( mesh );
+
+
+
 	/*
 	textureLoader.load( './assets/perlin-512.png', (texture)=> {
 
